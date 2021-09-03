@@ -1,17 +1,21 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const LoginPage = () => {
 
-
+    let history = useHistory();
     // Handles Login
     const handleLogin = () => {
         const verify = JSON.parse(localStorage.getItem(email));
+        
         if (verify && password === verify.password) {
 
             // Checks if the user is an Admin
             if (verify.isAdmin) {
+                history.push({pathname: '/admin', state:{verify}})
                 console.log('An admin logged in!');
             } else {
+                history.push({pathname: '/home', state:{verify}})
                 console.log('Logged in!')
             }
             //
