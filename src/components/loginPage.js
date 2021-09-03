@@ -1,24 +1,59 @@
+import { useState } from "react";
+
 const LoginPage = () => {
+
+
+    // Handles Login
+    const handleLogin = () => {
+        const verify = JSON.parse(localStorage.getItem(email));
+        if (verify && password === verify.password) {
+
+            // Checks if the user is an Admin
+            if (verify.isAdmin) {
+                console.log('An admin logged in!');
+            } else {
+                console.log('Logged in!')
+            }
+            //
+
+
+        }
+        else (
+            console.log('try again :(')
+        )
+    }
+
+    //
+
+
+
+    // This is where the user's input from the form is saved
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    //
+
+
+
     return (
         <div className="vh-100">
             <div className="container py-5 h-100">
                 <div className="row d-flex align-items-center justify-content-center h-100">
-                    <div className="col-md-8 col-log-7 col-xl-7">
+                    <div className="col-md-8 col-log-7 col-xl-7 text-center">
                         *Insert something*
                     </div>
                     <div className="col-md-7 col-lg-5 col-xl-5">
-                        <form>
-                            <div class="form-floating mb-4">
-                                <input type="email" id="emailInput" class="form-control form-control-lg"
-                                    placeholder="Enter your email here!" />
-                                <label class="form-label" for="emailInput">Email address</label>
+                        <form onSubmit={handleLogin}>
+                            <div className="form-floating mb-4">
+                                <input type="email" id="emailInput" className="form-control form-control-lg"
+                                    placeholder="Enter your email here!" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                <label className="form-label" htmlFor="emailInput">Email address</label>
                             </div>
-                            <div class="form-floating mb-4">
-                                <input type="password" id="passwordInput" class="form-control form-control-lg"
-                                    placeholder="Password" />
-                                <label class="form-label" for="passwordInput">Password</label>
+                            <div className="form-floating mb-4">
+                                <input type="password" id="passwordInput" className="form-control form-control-lg"
+                                    placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                <label className="form-label" htmlFor="passwordInput">Password</label>
                             </div>
-                            <button type="button" className="btn btn-primary">LOG IN</button>
+                            <button type="submit" className="btn btn-danger">LOG IN</button>
                         </form>
                     </div>
                 </div>
