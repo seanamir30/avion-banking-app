@@ -24,9 +24,6 @@ function App() {
             <Route exact path="/home" component={HomePage} />
             <Route exact path="/admin" component={Accounts}/>
           </Switch>
-        {/* <HomePage 
-        email = 'idk@gmail.com'
-      /> */}
       </div>
     </Router>
   );
