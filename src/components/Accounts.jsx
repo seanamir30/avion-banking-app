@@ -2,11 +2,19 @@ import React, { Component } from "react";
 import { useState } from "react";
 
 const Accounts = () => {
-  const [accounts, setAccount] = useState([
-    { id: 1, name: "Sample Name", balance: 9999 },
-    { id: 2, name: "Your Name", balance: 8888 },
-    { id: 3, name: "My Name", balance: 12345 },
-  ]);
+  // const [accounts, setAccount] = useState([
+  //   { id: 1, name: "Sample Name", balance: 9999 },
+  //   { id: 2, name: "Your Name", balance: 8888 },
+  //   { id: 3, name: "My Name", balance: 12345 },
+  // ]);
+
+  const accounts = [];
+  for(let i=0; i<localStorage.length;i++){
+    let account = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if(!account.isAdmin) accounts.push(account)
+  }
+
+  console.log(accounts)
 
   return (
     <React.Fragment>
@@ -22,7 +30,7 @@ const Accounts = () => {
         </thead>
         <tbody>
           {accounts.map((account) => (
-            <tr key={account.id}>
+            <tr>
               <td>{account.name}</td>
               <td>{account.id}</td>
               <td>{account.balance}</td>
