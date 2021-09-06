@@ -24,11 +24,6 @@ function App() {
           <Route exact path="/" component={LoginPage} />
           <Route exact path="/home" component={HomePage} />
           <Route exact path="/admin" component={Admin} />
-          <Route
-            exact
-            path="/manage-transaction"
-            component={AdminTransaction}
-          />
         </Switch>
       </div>
     </Router>

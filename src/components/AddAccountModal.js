@@ -24,7 +24,7 @@ const AddAccountModal = () => {
       const[name,setName] = useState("");
 
     return (
-        <div className="modal" tabIndex="-1" id="AddAccountModal">
+        <div className="modal fade" tabIndex="-1" id="AddAccountModal">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
