@@ -31,6 +31,17 @@ window.localStorage.setItem(
   })
 );
 
+window.localStorage.setItem(
+  "001",
+  JSON.stringify({
+    password: "11111",
+    isAdmin: false,
+    balance: 900,
+    id: "001",
+    name: "account number key",
+  })
+);
+
 function App() {
   return (
     <Router>

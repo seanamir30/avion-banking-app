@@ -1,20 +1,32 @@
 import React, { Component } from "react";
+import { useState, useEffect } from "react";
 
 const Withdraw = () => {
+  const [accountNumber, setAccountNumber] = useState("");
+  const [amount, setAmount] = useState(0);
+
+  const handleWithdraw = () => {
+    let account = JSON.parse(localStorage.getItem(accountNumber));
+    account.balance -= amount;
+    localStorage.setItem(accountNumber, JSON.stringify(account));
+  };
+
   return (
     <div className="col m-2 p-2">
       <form className="deposit-form p-4">
         <h2>Withdraw</h2>
-        <div class="form-group p-2 d-flex flex-column">
+        <div className="form-group p-2 d-flex flex-column">
           <label>Account Name</label>
           <input type="text" placeholder=" Enter Name Here" />
         </div>
-        <div class="form-group p-2 d-flex flex-column">
+        <div className="form-group p-2 d-flex flex-column">
           <label>Account Number</label>
           <input
-            type="number"
+            type="text"
             onWheel={(e) => e.target.blur()}
             placeholder=" Enter Account Number Here"
+            value={accountNumber}
+            onChange={(e) => setAccountNumber(e.target.value)}
           />
         </div>
         <div className="form-group p-2 d-flex flex-column">
@@ -23,9 +35,11 @@ const Withdraw = () => {
             type="number"
             onWheel={(e) => e.target.blur()}
             placeholder=" Enter Amount Here"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
           />
         </div>
-        <button type="button" class="btn btn-success">
+        <button type="button" class="btn btn-success" onClick={handleWithdraw}>
           Withdraw
         </button>
       </form>
