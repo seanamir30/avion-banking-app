@@ -6,6 +6,7 @@ import Withdraw from "./Withdraw";
 const AdminTransaction = () => {
   return (
 
+
     <div class="modal fade" id="adminTransactionModal" tabindex="-1">
 
       <div class="close">
