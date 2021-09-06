@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Deposit from "./Deposit";
 import Transfer from "./Transfer";
 import Withdraw from "./Withdraw";

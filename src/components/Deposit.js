@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 const Deposit = () => {
   return (
@@ -9,7 +9,7 @@ const Deposit = () => {
           <label>Account Name</label>
           <input type="text" placeholder=" Enter Name Here" />
         </div>
-        <div class="form-group p-2 d-flex flex-column">
+        <div className="form-group p-2 d-flex flex-column">
           <label>Account Number</label>
           <input
             type="number"

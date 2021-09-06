@@ -1,5 +1,3 @@
-import React, { Component } from "react";
-
 const Withdraw = () => {
   return (
     <div className="col m-2 p-2">

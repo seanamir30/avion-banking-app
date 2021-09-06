@@ -1,6 +1,5 @@
-import React, { Component } from "react";
-import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import AddAccountModal from "./AddAccountModal";
 
 const Accounts = () => {
   // const [accounts, setAccount] = useState([
@@ -24,7 +23,8 @@ const Accounts = () => {
   };
 
   return (
-    <React.Fragment>
+    <div className="container mt-3">
+      <AddAccountModal />
       <h2 className="text-center">All Accounts</h2>
       <table className="table">
         <thead>
@@ -44,12 +44,12 @@ const Accounts = () => {
           ))}
         </tbody>
       </table>
-      <button className="btn btn-success">Add Account</button>
+      <button className="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddAccountModal">Add Account</button>
       <button className="btn btn-danger m-2">Manage Accounts</button>
-      <button type="button" onClick={handleTransaction} class="btn btn-warning">
+      <button type="button" onClick={handleTransaction} className="btn btn-warning">
         Make Transactions
       </button>
-    </React.Fragment>
+    </div>
   );
 };
 
