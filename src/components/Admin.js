@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Accounts = () => {
   // const [accounts, setAccount] = useState([
@@ -8,13 +9,19 @@ const Accounts = () => {
   //   { id: 3, name: "My Name", balance: 12345 },
   // ]);
 
+  let history = useHistory();
+
   const accounts = [];
-  for(let i=0; i<localStorage.length;i++){
+  for (let i = 0; i < localStorage.length; i++) {
     let account = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    if(!account.isAdmin) accounts.push(account)
+    if (!account.isAdmin) accounts.push(account);
   }
 
-  console.log(accounts)
+  console.log(accounts);
+
+  const handleTransaction = () => {
+    history.push({ pathname: "/manage-transaction" });
+  };
 
   return (
     <React.Fragment>
@@ -25,7 +32,6 @@ const Accounts = () => {
             <th>Name</th>
             <th>Account Number</th>
             <th>Balance</th>
-            <th />
           </tr>
         </thead>
         <tbody>
@@ -34,14 +40,15 @@ const Accounts = () => {
               <td>{account.name}</td>
               <td>{account.id}</td>
               <td>{account.balance}</td>
-              <td>
-                <button className="btn btn-danger">Manage</button>
-              </td>
             </tr>
           ))}
         </tbody>
       </table>
       <button className="btn btn-success">Add Account</button>
+      <button className="btn btn-danger m-2">Manage Accounts</button>
+      <button type="button" onClick={handleTransaction} class="btn btn-warning">
+        Make Transactions
+      </button>
     </React.Fragment>
   );
 };
