@@ -4,6 +4,7 @@ function HomePage() {
     const passedState = useLocation();
     const {state} = passedState;
     const user = state.verify;
+    console.log(user)
 
     return (
         <div>
