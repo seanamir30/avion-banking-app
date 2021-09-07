@@ -1,4 +1,17 @@
+import React, { Component } from "react";
+import { useState, useEffect } from "react";
+
+
 const Withdraw = () => {
+  const [accountNumber, setAccountNumber] = useState("");
+  const [amount, setAmount] = useState(0);
+
+  const handleWithdraw = () => {
+    let account = JSON.parse(localStorage.getItem(accountNumber));
+    account.balance -= amount;
+    localStorage.setItem(accountNumber, JSON.stringify(account));
+  };
+
   return (
     <div className="col-xl p-2">
       <form className="card p-4">
@@ -12,9 +25,11 @@ const Withdraw = () => {
           <input
             className="form-control"
             id="accountNumber"
-            type="number"
+            type="text"
             onWheel={(e) => e.target.blur()}
             placeholder=" Enter Account Number Here"
+            value={accountNumber}
+            onChange={(e) => setAccountNumber(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -25,9 +40,11 @@ const Withdraw = () => {
             type="number"
             onWheel={(e) => e.target.blur()}
             placeholder=" Enter Amount Here"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
           />
         </div>
-        <button type="button" className="btn btn-success">
+        <button type="button" className="btn btn-success" onClick={handleWithdraw}>
           Withdraw
         </button>
       </form>

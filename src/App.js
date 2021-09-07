@@ -12,10 +12,6 @@ window.localStorage.setItem(
   JSON.stringify({ password: "admin", isAdmin: true })
 );
 
-
-
-
-
 function App() {
   return (
     <Router>
