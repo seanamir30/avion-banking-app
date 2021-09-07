@@ -5,19 +5,29 @@ const LoginPage = () => {
   let history = useHistory();
   // Handles Login
   const handleLogin = () => {
-    const verify = JSON.parse(localStorage.getItem(email));
-
-    if (verify && password === verify.password) {
-      // Checks if the user is an Admin
-      if (verify.isAdmin) {
-        history.push({ pathname: "/admin", state: { verify } });
-        console.log("An admin logged in!");
-      } else {
-        history.push({ pathname: "/home", state: { verify } });
-        console.log("Logged in!");
+    for (var key in localStorage) {
+      try{
+        let verify = JSON.parse(localStorage.getItem(key))
+        console.log(verify.email===email) 
+        if(verify.email===email){
+          if(verify.password===password){
+            if (verify.isAdmin) {
+              history.push({ pathname: "/admin", state: { verify } });
+              console.log("An admin logged in!");
+              break
+            } else {
+              history.push({ pathname: "/home", state: { verify } });
+              console.log("Logged in!");
+              break
+            }
+          }
+        }
       }
-      //
-    } else console.log("try again :(");
+      catch{
+        console.log("try again!")
+      }
+      
+    }
   };
 
   //
