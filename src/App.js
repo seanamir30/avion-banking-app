@@ -7,8 +7,8 @@ import "./App.css";
 
 // admin login
 window.localStorage.setItem(
-  "admin@gmail.com",
-  JSON.stringify({ password: "admin", isAdmin: true })
+  '00',
+  JSON.stringify({ email:"admin@gmail.com",password: "admin", isAdmin: true })
 );
 
 

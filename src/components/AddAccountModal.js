@@ -5,23 +5,24 @@ const AddAccountModal = () => {
 
 
     // Saves a new user to local storage
-    function addAccount(){
-        localStorage.setItem(email,JSON.stringify({
-          password: password,
-          isAdmin: false,
-          balance: balance,
-          name: name,
-          // a 10 digit number is generated for the id
-          id: Math.floor(Math.random() * 9000000000) + 1000000000
+
+    function addAccount() {
+        let id = (Math.floor(Math.random() * 9000000000) + 1000000000).toString()
+        localStorage.setItem(id, JSON.stringify({
+            id: id,
+            email: email,
+            password: password,
+            isAdmin: false,
+            balance: balance,
+            name: name,
         }))
-
-      }
+    }
     //
-
-      const[email,setEmail] = useState("");
-      const[password,setPassword] = useState("");
-      const[balance,setBalance] = useState("");
-      const[name,setName] = useState("");
+    
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [balance, setBalance] = useState("");
+    const [name, setName] = useState("");
 
     return (
         <div className="modal fade" tabIndex="-1" id="AddAccountModal">
@@ -59,5 +60,6 @@ const AddAccountModal = () => {
         </div>
     )
 }
+
 
 export default AddAccountModal
