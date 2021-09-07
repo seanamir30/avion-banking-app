@@ -1,4 +1,3 @@
-import { useHistory } from "react-router-dom";
 import AddAccountModal from "./AddAccountModal";
 import AdminTransaction from "./AdminTransaction";
 
@@ -8,8 +7,6 @@ const Accounts = () => {
   //   { id: 2, name: "Your Name", balance: 8888 },
   //   { id: 3, name: "My Name", balance: 12345 },
   // ]);
-
-  let history = useHistory();
 
   const accounts = [];
   for (let i = 0; i < localStorage.length; i++) {

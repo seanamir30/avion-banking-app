@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 
 const Withdraw = () => {

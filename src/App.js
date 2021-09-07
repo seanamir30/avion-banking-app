@@ -1,7 +1,6 @@
 import LoginPage from "./components/LoginPage";
 import Admin from "./components/Admin.js";
 import HomePage from "./components/HomePage";
-import AdminTransaction from "./components/AdminTransaction.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
@@ -11,6 +10,7 @@ window.localStorage.setItem(
   "admin@gmail.com",
   JSON.stringify({ password: "admin", isAdmin: true })
 );
+
 
 function App() {
   return (
