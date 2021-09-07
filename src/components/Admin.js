@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import AddAccountModal from "./AddAccountModal";
+import AdminTransaction from "./AdminTransaction";
 
 const Accounts = () => {
   // const [accounts, setAccount] = useState([
@@ -19,12 +19,10 @@ const Accounts = () => {
 
   console.log(accounts);
 
-  const handleTransaction = () => {
-    history.push({ pathname: "/manage-transaction" });
-  };
-
   return (
-    <React.Fragment>
+    <div className="container mt-3">
+      <AddAccountModal />
+      <AdminTransaction />
       <h2 className="text-center">All Accounts</h2>
       <table className="table">
         <thead>
@@ -44,12 +42,12 @@ const Accounts = () => {
           ))}
         </tbody>
       </table>
-      <button className="btn btn-success">Add Account</button>
-      <button className="btn btn-danger m-2">Manage Accounts</button>
-      <button type="button" onClick={handleTransaction} class="btn btn-warning">
+      <button className="btn btn-success m-1" data-bs-toggle="modal" data-bs-target="#AddAccountModal">Add Account</button>
+      <button className="btn btn-danger m-1">Manage Accounts</button>
+      <button type="button" data-bs-toggle="modal" data-bs-target="#adminTransactionModal" className="btn btn-warning m-1">
         Make Transactions
       </button>
-    </React.Fragment>
+    </div>
   );
 };
 

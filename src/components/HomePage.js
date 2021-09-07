@@ -7,7 +7,7 @@ function HomePage() {
 
     return (
         <div>
-            Account Number: {user.accountNumber}
+            Account Number: {user.id}
             <br/>
             Balance: {user.balance}
         </div>

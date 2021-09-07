@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { useState, useEffect } from "react";
 
+
 const Withdraw = () => {
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState(0);
@@ -12,16 +13,18 @@ const Withdraw = () => {
   };
 
   return (
-    <div className="col m-2 p-2">
-      <form className="deposit-form p-4">
+    <div className="col-xl p-2">
+      <form className="card p-4">
         <h2>Withdraw</h2>
-        <div className="form-group p-2 d-flex flex-column">
-          <label>Account Name</label>
-          <input type="text" placeholder=" Enter Name Here" />
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">Account Name</label>
+          <input id="name" className="form-control" type="text" placeholder=" Enter Name Here" />
         </div>
-        <div className="form-group p-2 d-flex flex-column">
-          <label>Account Number</label>
+        <div className="mb-3">
+          <label htmlFor="accountNumber" className="form-label">Account Number</label>
           <input
+            className="form-control"
+            id="accountNumber"
             type="text"
             onWheel={(e) => e.target.blur()}
             placeholder=" Enter Account Number Here"
@@ -29,9 +32,11 @@ const Withdraw = () => {
             onChange={(e) => setAccountNumber(e.target.value)}
           />
         </div>
-        <div className="form-group p-2 d-flex flex-column">
-          <label>Amount</label>
+        <div className="mb-3">
+          <label htmlFor="amount" className="form-label">Amount</label>
           <input
+            className="form-control"
+            id="amount"
             type="number"
             onWheel={(e) => e.target.blur()}
             placeholder=" Enter Amount Here"
@@ -39,7 +44,7 @@ const Withdraw = () => {
             onChange={(e) => setAmount(e.target.value)}
           />
         </div>
-        <button type="button" class="btn btn-success" onClick={handleWithdraw}>
+        <button type="button" className="btn btn-success" onClick={handleWithdraw}>
           Withdraw
         </button>
       </form>
