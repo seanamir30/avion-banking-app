@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i');
 
 body {
   font-family: "Roboto", sans-serif;
@@ -26,3 +27,86 @@ body {
   line-height: 1.33;
   border-radius: 25px;
 }
+
+
+
+
+.card{
+  width: 320px;
+  height: 190px;
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+    perspective:600px;
+    
+  }
+  
+  .card__part{
+    box-shadow: 1px 1px #aaa3a3;
+      top: 0;
+    position: absolute;
+  z-index: 1000;
+    left: 0;
+    display: inline-block;
+      width: 320px;
+      height: 190px;
+      background-image: url('https://papers.co/wallpaper/papers.co-vy78-circle-red-simple-minimal-pattern-background-35-3840x2160-4k-wallpaper.jpg'), linear-gradient(to right bottom, #fd696b, #fa616e, #f65871, #f15075, #ec4879); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      border-radius: 8px;
+     
+      -webkit-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -moz-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -ms-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -o-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      -webkit-transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+  }
+  
+  .card__front{
+    padding: 18px;
+  -webkit-transform: rotateY(0);
+  -moz-transform: rotateY(0);
+  }
+  
+  .card_number {
+      display: block;
+      width: 100%;
+      word-spacing: 4px;
+      font-size: 20px;
+      letter-spacing: 2px;
+      color: #fff;
+      margin-bottom: 20px;
+      margin-top: 20px;
+  }
+  
+  .card__space-75 {
+      width: 75%;
+      float: left;
+  }
+  
+  .card__space-25 {
+      width: 25%;
+      float: left;
+  }
+  
+  .card__label {
+      font-size: 10px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 1px;
+  }
+  
+  .card__info {
+      margin-bottom: 0;
+      margin-top: 5px;
+      font-size: 16px;
+      line-height: 18px;
+      color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
