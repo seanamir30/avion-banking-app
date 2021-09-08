@@ -17,7 +17,7 @@ const LoginPage = () => {
         console.log("Logged in!");
       }
       //
-    } else console.log("try again :(");
+    } else alert("try again :(");
   };
 
   //

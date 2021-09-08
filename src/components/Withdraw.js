@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 const Withdraw = () => {
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState(0);
@@ -9,6 +8,7 @@ const Withdraw = () => {
     let account = JSON.parse(localStorage.getItem(accountNumber));
     account.balance -= amount;
     localStorage.setItem(accountNumber, JSON.stringify(account));
+    window.location.reload();
   };
 
   return (
@@ -16,11 +16,20 @@ const Withdraw = () => {
       <form className="card p-4">
         <h2>Withdraw</h2>
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">Account Name</label>
-          <input id="name" className="form-control" type="text" placeholder=" Enter Name Here" />
+          <label htmlFor="name" className="form-label">
+            Account Name
+          </label>
+          <input
+            id="name"
+            className="form-control"
+            type="text"
+            placeholder=" Enter Name Here"
+          />
         </div>
         <div className="mb-3">
-          <label htmlFor="accountNumber" className="form-label">Account Number</label>
+          <label htmlFor="accountNumber" className="form-label">
+            Account Number
+          </label>
           <input
             className="form-control"
             id="accountNumber"
@@ -32,7 +41,9 @@ const Withdraw = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="amount" className="form-label">Amount</label>
+          <label htmlFor="amount" className="form-label">
+            Amount
+          </label>
           <input
             className="form-control"
             id="amount"
@@ -43,7 +54,11 @@ const Withdraw = () => {
             onChange={(e) => setAmount(e.target.value)}
           />
         </div>
-        <button type="button" className="btn btn-success" onClick={handleWithdraw}>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={handleWithdraw}
+        >
           Withdraw
         </button>
       </form>

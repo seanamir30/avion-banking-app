@@ -33,15 +33,26 @@ const Accounts = () => {
           {accounts.map((account) => (
             <tr>
               <td>{account.name}</td>
-              <td>{account.id}</td>
+              <td>{account.accountNumber}</td>
               <td>{account.balance}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <button className="btn btn-success m-1" data-bs-toggle="modal" data-bs-target="#AddAccountModal">Add Account</button>
+      <button
+        className="btn btn-success m-1"
+        data-bs-toggle="modal"
+        data-bs-target="#AddAccountModal"
+      >
+        Add Account
+      </button>
       <button className="btn btn-danger m-1">Manage Accounts</button>
-      <button type="button" data-bs-toggle="modal" data-bs-target="#adminTransactionModal" className="btn btn-warning m-1">
+      <button
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#adminTransactionModal"
+        className="btn btn-warning m-1"
+      >
         Make Transactions
       </button>
     </div>
