@@ -22,6 +22,7 @@ const Accounts = () => {
             <th>Name</th>
             <th>Account Number</th>
             <th>Balance</th>
+            <th></th>
           </tr>
         </thead>
         <AccountsTable />
