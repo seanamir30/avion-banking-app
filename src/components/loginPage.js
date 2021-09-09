@@ -24,10 +24,8 @@ const LoginPage = () => {
         }
       }
       catch{
-        console.log("try again!")
+        alert("try again :(");
       }
-      
-    }
   };
 
   //
