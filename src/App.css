@@ -28,6 +28,9 @@ body {
   border-radius: 25px;
 }
 
+.z-top{
+  z-index: 999999;
+}
 
 .fas{
   font-size: 1.5rem;

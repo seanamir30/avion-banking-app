@@ -1,18 +1,33 @@
 import { useState } from "react";
+import Alert from '@material-ui/lab/Alert';
+import { Fade } from '@material-ui/core';
 
 const Withdraw = () => {
+  const [alert, setAlert] = useState('');
+  const [animationDelay, setAnimationDelay] = useState('');
+
+
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState(0);
 
   const handleWithdraw = () => {
     let account = JSON.parse(localStorage.getItem(accountNumber));
-    account.balance -= amount;
-    localStorage.setItem(accountNumber, JSON.stringify(account));
-    window.location.reload();
+    console.log(account.balance > amount)
+    if(account.balance > amount){
+      account.balance -= amount;
+      localStorage.setItem(accountNumber, JSON.stringify(account));
+      window.location.reload();
+    } else {
+      setAlert(true)
+      setAnimationDelay(true)
+    }
   };
 
   return (
     <div className="col-xl p-2">
+    {alert ? <Fade in={animationDelay===true}><Alert onClose={() => {setAnimationDelay(false);setTimeout(function(){setAlert(false)},500)}} variant="filled" severity="error" className="position-fixed bottom-0 start-50 translate-middle z-top mt-5">
+        Insufficient funds to withdraw
+    </Alert></Fade> : <></>}
       <form className="card p-4">
         <h2>Withdraw</h2>
         <div className="mb-3">

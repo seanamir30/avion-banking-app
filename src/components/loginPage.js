@@ -5,8 +5,8 @@ const LoginPage = () => {
   let history = useHistory();
   // Handles Login
   const handleLogin = () => {
-    for (var key in localStorage) {
       try{
+        for (let key in localStorage) {
         let verify = JSON.parse(localStorage.getItem(key))
         console.log(verify.email===email) 
         if(verify.email===email){
@@ -19,6 +19,7 @@ const LoginPage = () => {
               history.push({ pathname: "/home", state: { verify } });
               console.log("Logged in!");
               break
+              }
             }
           }
         }
@@ -26,7 +27,6 @@ const LoginPage = () => {
       catch{
         alert("try again :(");
       }
-    }
   };
 
   //

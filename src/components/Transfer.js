@@ -1,7 +1,13 @@
 import React from "react";
 import { useState } from "react";
+import Alert from '@material-ui/lab/Alert';
+import { Fade } from '@material-ui/core';
+
+
 
 const Transfer = () => {
+  const [alert, setAlert] = useState('');
+  const [animationDelay, setAnimationDelay] = useState('');
   const [senderAccountNumber, setSenderAccountNumber] = useState("");
   const [receiverAccountNumber, setReceiverAccountNumber] = useState("");
 
@@ -12,21 +18,31 @@ const Transfer = () => {
     let receiverAccount = JSON.parse(
       localStorage.getItem(receiverAccountNumber)
     );
-    senderAccount.balance =
-      parseFloat(senderAccount.balance) - parseFloat(amount);
-    receiverAccount.balance =
-      parseFloat(receiverAccount.balance) + parseFloat(amount);
+    if (senderAccount.balance > amount) {
+      senderAccount.balance =
+        parseFloat(senderAccount.balance) - parseFloat(amount);
+      receiverAccount.balance =
+        parseFloat(receiverAccount.balance) + parseFloat(amount);
 
-    localStorage.setItem(senderAccountNumber, JSON.stringify(senderAccount));
-    localStorage.setItem(
-      receiverAccountNumber,
-      JSON.stringify(receiverAccount)
-    );
-    window.location.reload();
+      localStorage.setItem(senderAccountNumber, JSON.stringify(senderAccount));
+      localStorage.setItem(
+        receiverAccountNumber,
+        JSON.stringify(receiverAccount)
+      );
+      window.location.reload();
+    } else {
+      setAlert(true)
+      setAnimationDelay(true)
+    }
+
   };
 
   return (
+    <>
     <div className="col-xl p-2">
+      {alert ? <Fade in={animationDelay===true}><Alert onClose={() => {setAnimationDelay(false);setTimeout(function(){setAlert(false)},500)}} variant="filled" severity="error" className="position-fixed bottom-0 start-50 translate-middle z-top mt-5">
+        Insufficient funds to transfer
+    </Alert></Fade> : <></>}
       <form className="card p-4">
         <h2 className="font-weight-bold">Transfer</h2>
         <h3 className="m-0 pl-2">Sender</h3>
@@ -89,6 +105,7 @@ const Transfer = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 
