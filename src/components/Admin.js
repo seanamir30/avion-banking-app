@@ -1,5 +1,8 @@
 import AddAccountModal from "./AddAccountModal";
 import AdminTransaction from "./AdminTransaction";
+import AccountsTable from "./AccountsTable";
+import { useState } from "react";
+
 
 const Accounts = () => {
   // const [accounts, setAccount] = useState([
@@ -7,14 +10,6 @@ const Accounts = () => {
   //   { id: 2, name: "Your Name", balance: 8888 },
   //   { id: 3, name: "My Name", balance: 12345 },
   // ]);
-
-  const accounts = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    let account = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    if (!account.isAdmin) accounts.push(account);
-  }
-
-  console.log(accounts);
 
   return (
     <div className="container mt-3">
@@ -29,15 +24,7 @@ const Accounts = () => {
             <th>Balance</th>
           </tr>
         </thead>
-        <tbody>
-          {accounts.map((account) => (
-            <tr>
-              <td>{account.name}</td>
-              <td>{account.accountNumber}</td>
-              <td>{account.balance}</td>
-            </tr>
-          ))}
-        </tbody>
+        <AccountsTable />
       </table>
       <button
         className="btn btn-success m-1"
