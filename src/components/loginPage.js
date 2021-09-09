@@ -26,6 +26,7 @@ const LoginPage = () => {
       catch{
         alert("try again :(");
       }
+    }
   };
 
   //

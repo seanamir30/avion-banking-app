@@ -8,13 +8,12 @@ function HomePage() {
     console.log(user)
 
     return (
-        <div className="container mt-3">
-            <div className="d-flex justify-content-center">
+        <div className="container">
+            <div className="d-flex flex-column align-items-center">
+                <i class="fas fa-th-large align-self-start mt-3"></i>
                 <Card user={user}/>
+                <i class="fas fa-chart-line align-self-end m-2"></i>
             </div>
-            {/* Account Number: {user.id}
-            <br/>
-            Balance: {user.balance} */}
         </div>
     )
 }

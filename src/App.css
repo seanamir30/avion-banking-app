@@ -29,7 +29,10 @@ body {
 }
 
 
-
+.fas{
+  font-size: 1.5rem;
+  color: tomato;
+}
 
 .card{
   width: 320px;
