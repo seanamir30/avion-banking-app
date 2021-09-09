@@ -1,6 +1,6 @@
 const card = ({user}) => {
     return (
-        <div class="card m-3">
+        <div class="card_ m-3">
             <div class="card__front card__part">
                 <p class="card__info">*Bank Name*</p>
                 <p class ="card_number">
