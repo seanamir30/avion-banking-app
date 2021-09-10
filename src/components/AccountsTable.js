@@ -16,6 +16,10 @@ const AccountsTable = () => {
     //     setUpdateAccounts(accounts)
     //     hasUpdated.current = true;
     // }
+    const handleDelete = (key) => {
+        localStorage.removeItem(key);
+        window.location.reload();
+    };
 
     return (
         <tbody>
@@ -24,6 +28,7 @@ const AccountsTable = () => {
                     <td>{account.name}</td>
                     <td>{account.id}</td>
                     <td>{account.balance}</td>
+                    <td><i class="fa fa-trash" style={{cursor:"pointer"}} onClick={() => handleDelete(account.id)} aria-hidden="true"></i></td>
                 </tr>
             ))}
         </tbody>
