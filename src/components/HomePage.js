@@ -5,6 +5,8 @@ import Card from "./Card";
 import ClientDeposit from "./ClientDeposit";
 import ClientWithdraw from "./ClientWithdraw";
 import ClientTransfer from "./ClientTransfer";
+import TransactionHistory from "./TransactionHistory";
+import { LocalAtm,Sync,AccountBalance } from '@material-ui/icons'
 
 function HomePage() {
   const passedState = useLocation();
@@ -33,23 +35,16 @@ function HomePage() {
       />
       <div className="d-flex flex-column align-items-center">
         <i className="fas fa-th-large align-self-start mt-3"></i>
-        <Card user={user} />
+        <Card id={user.id} />
         <i className="fas fa-chart-line align-self-end m-2"></i>
         <div className="btn-group" role="group" aria-label="Nav">
           <button
             type="button"
             className="btn btn-outline-danger"
             data-bs-toggle="modal"
-            data-bs-target="#clientWithdrawModal"
-          >
-            Widthdraw
-          </button>
-          <button
-            type="button"
-            className="btn btn-outline-danger"
-            data-bs-toggle="modal"
             data-bs-target="#clientDepositModal"
           >
+            <AccountBalance/><br/>
             Deposit
           </button>
           <button
@@ -58,10 +53,21 @@ function HomePage() {
             data-bs-toggle="modal"
             data-bs-target="#clientTransferModal"
           >
+            <Sync/><br/>
             Transfer
           </button>
+          <button
+            type="button"
+            className="btn btn-outline-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#clientWithdrawModal"
+          >
+            <LocalAtm/><br/>
+            Withdraw
+          </button>
         </div>
-        <TransactionHistory id={user}/>
+        <TransactionHistory id={user.id}/>
+    </div>
     </div>
   );
 }

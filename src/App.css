@@ -41,6 +41,11 @@ body {
   color: tomato;
 }
 
+.btn:focus{
+  outline: none;
+  box-shadow: none;
+}
+
 .card_{
   width: 320px;
   height: 190px;
