@@ -15,6 +15,7 @@ const AddAccountModal = () => {
             isAdmin: false,
             balance: balance,
             name: name,
+            transactions:[]
         }))
     }
     //

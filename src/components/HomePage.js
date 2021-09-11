@@ -1,3 +1,4 @@
+
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import Card from "./Card";
@@ -60,7 +61,7 @@ function HomePage() {
             Transfer
           </button>
         </div>
-      </div>
+        <TransactionHistory id={user}/>
     </div>
   );
 }

@@ -10,12 +10,29 @@ const Withdraw = () => {
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState(0);
 
+
+  const saveToTransactionHistory = () => {
+    let account = JSON.parse(localStorage.getItem(accountNumber));
+    let d = new Date()
+    let date = d.getDate()
+    let month = d.getMonth()
+    let dateToBeSaved = `${date}/${month}`
+    let transactions = account.transactions
+    transactions.push({
+      'title': 'Withdraw',
+      'date' : dateToBeSaved,
+      'amount' : `-${amount}`
+    })
+    localStorage.setItem(account.id,JSON.stringify(account))
+
+  }
+
   const handleWithdraw = () => {
     let account = JSON.parse(localStorage.getItem(accountNumber));
-    console.log(account.balance > amount)
     if(account.balance > amount){
       account.balance -= amount;
       localStorage.setItem(accountNumber, JSON.stringify(account));
+      saveToTransactionHistory();
       window.location.reload();
     } else {
       setAlert(true)

@@ -13,6 +13,29 @@ const Transfer = () => {
 
   const [amount, setAmount] = useState(0);
 
+  const saveToTransactionHistory = () => {
+    let senderAccount = JSON.parse(localStorage.getItem(senderAccountNumber));
+    let receiverAccount = JSON.parse(localStorage.getItem(receiverAccountNumber));
+    let d = new Date()
+    let date = d.getDate()
+    let month = d.getMonth()
+    let dateToBeSaved = `${date}/${month}`
+    let transactions = senderAccount.transactions
+    transactions.push({
+      'title': 'Transfer',
+      'date' : dateToBeSaved,
+      'amount' : `-${amount}`
+    })
+    localStorage.setItem(senderAccount.id,JSON.stringify(senderAccount))
+    transactions = receiverAccount.transactions
+    transactions.push({
+      'title': 'Transfer',
+      'date' : dateToBeSaved,
+      'amount' : `+${amount}`
+    })
+    localStorage.setItem(receiverAccount.id,JSON.stringify(receiverAccount))
+  }
+
   const handleTransfer = () => {
     let senderAccount = JSON.parse(localStorage.getItem(senderAccountNumber));
     let receiverAccount = JSON.parse(
@@ -29,6 +52,8 @@ const Transfer = () => {
         receiverAccountNumber,
         JSON.stringify(receiverAccount)
       );
+
+      saveToTransactionHistory()
       window.location.reload();
     } else {
       setAlert(true)
