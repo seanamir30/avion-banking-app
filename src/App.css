@@ -28,6 +28,10 @@ body {
   border-radius: 25px;
 }
 
+.transactions{
+  height: 50vh;
+}
+
 .z-top{
   z-index: 999999;
 }

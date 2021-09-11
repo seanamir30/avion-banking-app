@@ -5,11 +5,28 @@ const Deposit = () => {
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState(0);
 
+  const saveToTransactionHistory = () => {
+    let account = JSON.parse(localStorage.getItem(accountNumber));
+    let d = new Date()
+    let date = d.getDate()
+    let month = d.getMonth()
+    let dateToBeSaved = `${date}/${month}`
+    let transactions = account.transactions
+    transactions.push({
+      'title': 'Deposit',
+      'date' : dateToBeSaved,
+      'amount' : `+${amount}`
+    })
+    localStorage.setItem(account.id,JSON.stringify(account))
+
+  }
+
   const handleDeposit = () => {
 
     let account = JSON.parse(localStorage.getItem(accountNumber));
     account.balance = parseFloat(account.balance) + parseFloat(amount);
     localStorage.setItem(accountNumber, JSON.stringify(account));
+    saveToTransactionHistory();
     window.location.reload();
   };
   return (
