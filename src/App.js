@@ -4,30 +4,10 @@ import HomePage from "./components/HomePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
-// sample normal account
-
 // window.localStorage.setItem(
-//   "1002",
-//   JSON.stringify({
-//     name: "Another User",
-//     password: "password",
-//     isAdmin: false,
-//     balance: 1000,
-//     accountNumber: "1002",
-//   })
+//   '4148150944',
+//   JSON.stringify({"id":"4148150944","email":"seanamir30@gmail.com","password":"123","isAdmin":false,"balance":31050,"name":"Sean Amir Cafe","transactions":[{"title":"withdraw","amount":"-500","date":"05/24","time":"13:00"},{"title":"withdraw","amount":"+500","date":"05/24","time":"13:00"},{"title":"Transfer","date":"10/8","amount":"-1000"},{"title":"Transfer","date":"10/8","amount":"+2000"},{"title":"Withdraw","date":"10/8","amount":"-1000"},{"title":"Deposit","date":"10/8","amount":"+2000"},{"title":"Withdraw","date":"10/8","amount":"-500"},{"title":"Withdraw","date":"10/8","amount":"-2350"}]})
 // );
-
-// window.localStorage.setItem(
-//   "1001",
-//   JSON.stringify({
-//     name: "Normal User",
-//     password: "password",
-//     isAdmin: false,
-//     balance: 400,
-//     accountNumber: "1001",
-//   })
-// );
-// admin login
 window.localStorage.setItem(
   '00',
   JSON.stringify({ email:"admin@gmail.com",password: "admin", isAdmin: true })
