@@ -1,4 +1,4 @@
-import LoginPage from "./components/LoginPage";
+import LoginPage from "./components/LoginPage.js";
 import Admin from "./components/Admin.js";
 import HomePage from "./components/HomePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";

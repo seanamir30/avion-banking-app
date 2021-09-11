@@ -22,7 +22,6 @@ const Deposit = () => {
   }
 
   const handleDeposit = () => {
-
     let account = JSON.parse(localStorage.getItem(accountNumber));
     account.balance = parseFloat(account.balance) + parseFloat(amount);
     localStorage.setItem(accountNumber, JSON.stringify(account));
