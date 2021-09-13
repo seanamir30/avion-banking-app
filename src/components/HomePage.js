@@ -7,7 +7,7 @@ import ClientWithdraw from "./ClientWithdraw";
 import ClientTransfer from "./ClientTransfer";
 import TransactionHistory from "./TransactionHistory";
 import Menu from "./Menu";
-import { LocalAtm,Sync,AccountBalance } from '@material-ui/icons'
+import { LocalAtm, Sync, AccountBalance } from '@material-ui/icons'
 
 function HomePage() {
   const passedState = useLocation();
@@ -15,22 +15,31 @@ function HomePage() {
   const user = state.verify;
   console.log(user);
 
+  const [refresh, setRefresh] = useState(false)
+
+
   return (
     <div className="container vh-100">
       {/* modals */}
       <ClientWithdraw
+        refreshCheck={refresh}
+        refresher={setRefresh}
         key={user.id}
         balance={user.balance}
         accountNumber={user.id}
       />
 
       <ClientDeposit
+        refreshCheck={refresh}
+        refresher={setRefresh}
         key={user.id}
         balance={user.balance}
         accountNumber={user.id}
       />
 
       <ClientTransfer
+        refreshCheck={refresh}
+        refresher={setRefresh}
         key={user.id}
         balance={user.balance}
         accountNumber={user.id}
@@ -50,7 +59,7 @@ function HomePage() {
             data-bs-toggle="modal"
             data-bs-target="#clientDepositModal"
           >
-            <AccountBalance/><br/>
+            <AccountBalance /><br />
             Deposit
           </button>
           <button
@@ -59,7 +68,7 @@ function HomePage() {
             data-bs-toggle="modal"
             data-bs-target="#clientTransferModal"
           >
-            <Sync/><br/>
+            <Sync /><br />
             Transfer
           </button>
           <button
@@ -68,12 +77,12 @@ function HomePage() {
             data-bs-toggle="modal"
             data-bs-target="#clientWithdrawModal"
           >
-            <LocalAtm/><br/>
+            <LocalAtm /><br />
             Withdraw
           </button>
         </div>
-        <TransactionHistory id={user.id}/>
-    </div>
+        <TransactionHistory id={user.id} />
+      </div>
     </div>
   );
 }

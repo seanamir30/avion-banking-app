@@ -1,4 +1,5 @@
 import React from "react";
+
 import { useState } from "react";
 
 const ClientWithdraw = (props) => {
@@ -24,8 +25,9 @@ const ClientWithdraw = (props) => {
     let account = JSON.parse(localStorage.getItem(props.accountNumber));
     account.balance = parseFloat(account.balance) - parseFloat(amount);
     localStorage.setItem(props.accountNumber, JSON.stringify(account));
+    console.log(props.refreshCheck)
+    !props.refreshCheck ? props.refresher(true) : props.refresher(false);
     saveToTransactionHistory();
-    window.location.reload();
   };
 
   return (
@@ -57,7 +59,7 @@ const ClientWithdraw = (props) => {
             />
           </div>
           <div className="modal-footer">
-            <button onClick={handleWithdraw} className="btn btn-primary">
+            <button onClick={handleWithdraw} className="btn btn-primary" data-bs-dismiss="modal">
               Enter
             </button>
           </div>

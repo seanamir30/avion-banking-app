@@ -20,8 +20,8 @@ const ClientTransfer = (props) => {
       receipientAccountNumber,
       JSON.stringify(receiverAccount)
     );
+    !props.refreshCheck ? props.refresher(true) : props.refresher(false);
     saveToTransactionHistory()
-    window.location.reload();
   };
 
   const saveToTransactionHistory = () => {
@@ -87,7 +87,7 @@ const ClientTransfer = (props) => {
             />
           </div>
           <div className="modal-footer">
-            <button onClick={handleTransfer} className="btn btn-primary">
+            <button onClick={handleTransfer} className="btn btn-primary" data-bs-dismiss="modal">
               Enter
             </button>
           </div>

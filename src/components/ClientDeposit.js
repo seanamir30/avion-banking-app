@@ -24,8 +24,8 @@ const ClientDeposit = (props) => {
     let account = JSON.parse(localStorage.getItem(props.accountNumber));
     account.balance = parseFloat(account.balance) + parseFloat(amount);
     localStorage.setItem(props.accountNumber, JSON.stringify(account));
+    !props.refreshCheck ? props.refresher(true) : props.refresher(false);
     saveToTransactionHistory();
-    window.location.reload();
   };
   return (
     <div
@@ -56,7 +56,7 @@ const ClientDeposit = (props) => {
             />
           </div>
           <div className="modal-footer">
-            <button className="btn btn-primary" onClick={handleDeposit}>
+            <button className="btn btn-primary" onClick={handleDeposit}  data-bs-dismiss="modal">
               Enter
             </button>
           </div>
