@@ -5,9 +5,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-.close{
-  top:2vh;
-  right:3vw;
+.close-modal{
+  top:0;
+  right:0;
+  margin:5px;
   position: fixed;
   z-index: 2000;
 }

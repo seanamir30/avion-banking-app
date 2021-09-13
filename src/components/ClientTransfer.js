@@ -20,8 +20,32 @@ const ClientTransfer = (props) => {
       receipientAccountNumber,
       JSON.stringify(receiverAccount)
     );
+    saveToTransactionHistory()
     window.location.reload();
   };
+
+  const saveToTransactionHistory = () => {
+    let senderAccount = JSON.parse(localStorage.getItem(props.accountNumber));
+    let receiverAccount = JSON.parse(localStorage.getItem(receipientAccountNumber));
+    let d = new Date()
+    let date = d.getDate()
+    let month = d.getMonth()
+    let dateToBeSaved = `${date}/${month}`
+    let transactions = senderAccount.transactions
+    transactions.push({
+      'title': 'Transfer',
+      'date' : dateToBeSaved,
+      'amount' : `-${amount}`
+    })
+    localStorage.setItem(senderAccount.id,JSON.stringify(senderAccount))
+    transactions = receiverAccount.transactions
+    transactions.push({
+      'title': 'Transfer',
+      'date' : dateToBeSaved,
+      'amount' : `+${amount}`
+    })
+    localStorage.setItem(receiverAccount.id,JSON.stringify(receiverAccount))
+  }
 
   return (
     <div
@@ -31,7 +55,7 @@ const ClientTransfer = (props) => {
       aria-labelledby="clientTransferModalLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog">
+      <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="clientTransferModalLabel">

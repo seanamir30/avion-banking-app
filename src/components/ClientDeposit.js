@@ -4,10 +4,27 @@ import { useState } from "react";
 const ClientDeposit = (props) => {
   const [amount, setAmount] = useState(0);
 
+  const saveToTransactionHistory = () => {
+    let account = JSON.parse(localStorage.getItem(props.accountNumber));
+    let d = new Date()
+    let date = d.getDate()
+    let month = d.getMonth()
+    let dateToBeSaved = `${date}/${month}`
+    let transactions = account.transactions
+    transactions.push({
+      'title': 'Deposit',
+      'date' : dateToBeSaved,
+      'amount' : `+${amount}`
+    })
+    localStorage.setItem(account.id,JSON.stringify(account))
+
+  }
+
   const handleDeposit = () => {
     let account = JSON.parse(localStorage.getItem(props.accountNumber));
     account.balance = parseFloat(account.balance) + parseFloat(amount);
     localStorage.setItem(props.accountNumber, JSON.stringify(account));
+    saveToTransactionHistory();
     window.location.reload();
   };
   return (
@@ -18,7 +35,7 @@ const ClientDeposit = (props) => {
       aria-labelledby="clientDepositModalLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog">
+      <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="clientDepositModalLabel">
