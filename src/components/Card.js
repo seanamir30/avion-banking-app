@@ -4,7 +4,7 @@ const Card = ({ id }) => {
     const user = JSON.parse(localStorage.getItem(id))
     console.log(id)
     return (
-        <div class="card_ m-3">
+        <div class="card_ m-3 mt-5">
             <div class="card__front card__part">
                 <p class="card__info">*Bank Name*</p>
                 <p class="card_number">

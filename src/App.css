@@ -33,7 +33,7 @@ body {
 }
 
 .z-top{
-  z-index: 999999;
+  z-index: 3;
 }
 
 .fas{
@@ -46,6 +46,109 @@ body {
   box-shadow: none;
 }
 
+
+/* Menu */
+.wrapper{
+  position: fixed;
+  z-index:4;
+  top: 0;
+  /*left: -100%;*/
+  right: -100%;
+  height: 100%;
+  width: 100%;
+  /*background: linear-gradient(90deg, #f92c78, #4114a1);*/
+  /* background: linear-gradient(375deg, #1cc7d0, #2ede98); */
+ /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);*/
+  background-color: rgba(255, 255, 255, 0.15);  
+  backdrop-filter: blur(5px);
+  transition: all 0.6s ease-in-out;
+}
+#active:checked ~ .wrapper{
+  /*left: 0;*/
+  right:0;
+}
+.menu-btn{
+  position: fixed;
+  z-index: 6;
+  left: 0px;
+  top: 0px;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.menu-btn span,
+.menu-btn:before,
+.menu-btn:after{
+	content: "";
+	position: absolute;
+	top: calc(50% - 1px);
+	left: 30%;
+	width: 40%;
+	border-bottom: 2px solid tomato;
+	transition: transform .6s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.menu-btn:before{
+  transform: translateY(-8px);
+}
+.menu-btn:after{
+  transform: translateY(8px);
+}
+
+
+.close {
+	z-index: 5;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	transition: background .6s;
+}
+
+.btn-square-md {
+  border:0;
+  margin: .5rem;
+  width: 150px !important;
+  border-radius: 15px;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 150px !important;
+  text-align: center;
+  padding: 0px;
+  font-size:12px;
+  }
+
+/* closing animation */
+#active:checked + .menu-btn span {
+	transform: scaleX(0);
+}
+#active:checked + .menu-btn:before {
+	transform: rotate(45deg);
+  border-color: tomato;
+}
+#active:checked + .menu-btn:after {
+	transform: rotate(-45deg);
+  border-color: tomato;
+}
+input[type="checkbox"]{
+  display: none;
+}
+.content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  text-align: center;
+  width: 100%;
+  color: #202020;
+}
+
+
+/* Card */
 .card_{
   width: 320px;
   height: 190px;

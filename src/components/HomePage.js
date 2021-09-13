@@ -6,6 +6,7 @@ import ClientDeposit from "./ClientDeposit";
 import ClientWithdraw from "./ClientWithdraw";
 import ClientTransfer from "./ClientTransfer";
 import TransactionHistory from "./TransactionHistory";
+import Menu from "./Menu";
 import { LocalAtm,Sync,AccountBalance } from '@material-ui/icons'
 
 function HomePage() {
@@ -16,6 +17,7 @@ function HomePage() {
 
   return (
     <div className="container vh-100">
+      {/* modals */}
       <ClientWithdraw
         key={user.id}
         balance={user.balance}
@@ -33,8 +35,12 @@ function HomePage() {
         balance={user.balance}
         accountNumber={user.id}
       />
+
+
+
+
       <div className="d-flex flex-column align-items-center">
-        <i className="fas fa-th-large align-self-start mt-3"></i>
+        <Menu />
         <Card id={user.id} />
         <i className="fas fa-chart-line align-self-end m-2"></i>
         <div className="btn-group" role="group" aria-label="Nav">
