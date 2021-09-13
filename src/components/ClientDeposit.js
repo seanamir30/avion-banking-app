@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { useState } from "react";
+
 const ClientDeposit = (props) => {
   const [amount, setAmount] = useState(0);
 
   const handleDeposit = () => {
     let account = JSON.parse(localStorage.getItem(props.accountNumber));
-    account.balance = parseFloat(account.balance) - parseFloat(amount);
+    account.balance = parseFloat(account.balance) + parseFloat(amount);
     localStorage.setItem(props.accountNumber, JSON.stringify(account));
     window.location.reload();
   };
