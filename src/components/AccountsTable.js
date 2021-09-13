@@ -4,17 +4,33 @@ const AccountsTable = (props) => {
   let accounts = [];
   // const hasUpdated = useRef(false)
   // const [updateAccounts,setUpdateAccounts] = useState([])
-  console.log(accounts);
-  for (let i = 0; i < localStorage.length; i++) {
-    let account = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    if (!account.isAdmin) accounts.push(account);
+
+
+  const [allAccountsChecked, setAllAccountsChecked] = useState(false)
+  const [allAccounts, setAllAccounts] = useState(accounts);
+
+
+  if (!allAccountsChecked) {
+    for (let i = 0; i < localStorage.length; i++) {
+      let account = JSON.parse(localStorage.getItem(localStorage.key(i)));
+      if (!account.isAdmin) accounts.push(account);
+    }
+    setAllAccountsChecked(true)
+    setAllAccounts([...accounts])
   }
 
-  const [allAccounts, setAllAccounts] = useState(accounts);
+
+  
+
+  const updateTable = () => {
+    setAllAccounts([...accounts]);
+    setAllAccountsChecked(false);
+    console.log('update')
+  }
 
   const handleDelete = (key) => {
     localStorage.removeItem(key);
-    setAllAccounts([...accounts]);
+    updateTable()
   };
 
   return (
@@ -28,12 +44,12 @@ const AccountsTable = (props) => {
             <i
               class="fa fa-trash"
               style={{ cursor: "pointer" }}
-              onClick={() => handleDelete(account.id)}
+              onClick={() => { handleDelete(account.id) }}
               aria-hidden="true"
             ></i>
           </td>
         </tr>
-      ))}
+      )).reverse()}
     </tbody>
   );
 };
