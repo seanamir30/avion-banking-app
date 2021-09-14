@@ -17,7 +17,6 @@ function HomePage() {
 
   const [refresh, setRefresh] = useState(false)
 
-
   return (
     <div className="container vh-100">
       {/* modals */}
