@@ -17,13 +17,12 @@ const ClientDeposit = (props) => {
     let dateToBeSaved = `${date}/${month}`
     let transactions = account.transactions
     transactions.push({
-      'title': 'Deposit',
-      'date' : dateToBeSaved,
-      'amount' : `+${amount}`
-    })
-    localStorage.setItem(account.id,JSON.stringify(account))
-
-  }
+      title: "Deposit",
+      date: dateToBeSaved,
+      amount: `+${amount}`,
+    });
+    localStorage.setItem(account.id, JSON.stringify(account));
+  };
 
   const alertHandler = () => {
     let errorMessage = ''
@@ -81,7 +80,11 @@ const ClientDeposit = (props) => {
             />
           </div>
           <div className="modal-footer">
-            <button className="btn btn-primary" onClick={handleDeposit}  data-bs-dismiss="modal">
+            <button
+              className="btn btn-primary"
+              onClick={handleDeposit}
+              data-bs-dismiss="modal"
+            >
               Enter
             </button>
           </div>
