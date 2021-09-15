@@ -6,19 +6,18 @@ const ClientDeposit = (props) => {
 
   const saveToTransactionHistory = () => {
     let account = JSON.parse(localStorage.getItem(props.accountNumber));
-    let d = new Date()
-    let date = d.getDate()
-    let month = d.getMonth()
-    let dateToBeSaved = `${date}/${month}`
-    let transactions = account.transactions
+    let d = new Date();
+    let date = d.getDate();
+    let month = d.getMonth();
+    let dateToBeSaved = `${date}/${month}`;
+    let transactions = account.transactions;
     transactions.push({
-      'title': 'Deposit',
-      'date' : dateToBeSaved,
-      'amount' : `+${amount}`
-    })
-    localStorage.setItem(account.id,JSON.stringify(account))
-
-  }
+      title: "Deposit",
+      date: dateToBeSaved,
+      amount: `+${amount}`,
+    });
+    localStorage.setItem(account.id, JSON.stringify(account));
+  };
 
   const handleDeposit = () => {
     let account = JSON.parse(localStorage.getItem(props.accountNumber));
@@ -56,7 +55,11 @@ const ClientDeposit = (props) => {
             />
           </div>
           <div className="modal-footer">
-            <button className="btn btn-primary" onClick={handleDeposit}  data-bs-dismiss="modal">
+            <button
+              className="btn btn-primary"
+              onClick={handleDeposit}
+              data-bs-dismiss="modal"
+            >
               Enter
             </button>
           </div>
