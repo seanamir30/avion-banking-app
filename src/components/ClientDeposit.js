@@ -13,8 +13,8 @@ const ClientDeposit = (props) => {
   const saveToTransactionHistory = () => {
     let d = new Date()
     let date = d.getDate()
-    let month = d.getMonth()
-    let dateToBeSaved = `${date}/${month}`
+    let month = d.getMonth()+1
+    let dateToBeSaved = `${month}/${date}`
     let transactions = account.transactions
     transactions.push({
       title: "Deposit",

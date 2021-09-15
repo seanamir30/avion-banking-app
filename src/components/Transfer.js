@@ -1,25 +1,28 @@
 import React from "react";
 import { useState } from "react";
+import TransactionAlert from "./TransactionAlert";
 import Alert from "@material-ui/lab/Alert";
 import { Fade } from "@material-ui/core";
 
 const Transfer = () => {
   const [alert, setAlert] = useState("");
   const [animationDelay, setAnimationDelay] = useState("");
+  const [severity, setSeverity] = useState("");
   const [senderAccountNumber, setSenderAccountNumber] = useState("");
   const [receiverAccountNumber, setReceiverAccountNumber] = useState("");
+  let senderAccount = JSON.parse(localStorage.getItem(senderAccountNumber));
+    let receiverAccount = JSON.parse(
+      localStorage.getItem(receiverAccountNumber)
+    );
 
   const [amount, setAmount] = useState(0);
 
   const saveToTransactionHistory = () => {
-    let senderAccount = JSON.parse(localStorage.getItem(senderAccountNumber));
-    let receiverAccount = JSON.parse(
-      localStorage.getItem(receiverAccountNumber)
-    );
+    
     let d = new Date();
     let date = d.getDate();
-    let month = d.getMonth();
-    let dateToBeSaved = `${date}/${month}`;
+    let month = d.getMonth()+1;
+    let dateToBeSaved = `${month}/${date}`;
     let transactions = senderAccount.transactions;
     transactions.push({
       title: "Transfer",
@@ -36,12 +39,18 @@ const Transfer = () => {
     localStorage.setItem(receiverAccount.id, JSON.stringify(receiverAccount));
   };
 
+  const alertHandler = () => {
+    let message = ''
+    if(severity === 'error'){
+      !senderAccount || !receiverAccount ? message = "The account number you have entered is invalid" : senderAccount.balance > amount || receiverAccount.balance > amount || amount === 0 ?  message = "Please enter a valid amount"  : message = "Sorry, you got insufficient funds for your request"
+    }
+    else{message="You have withdrawn successfully!"}
+    setTimeout(()=>{setAnimationDelay(false); setTimeout(()=>{setAlert(false)},500)},5000)
+    return <TransactionAlert aDelay={animationDelay} sAnimationDelay={setAnimationDelay} sAlert={setAlert} message={message} severity={severity}/>
+  }
+
   const handleTransfer = () => {
-    let senderAccount = JSON.parse(localStorage.getItem(senderAccountNumber));
-    let receiverAccount = JSON.parse(
-      localStorage.getItem(receiverAccountNumber)
-    );
-    if (senderAccount.balance > amount) {
+    if (senderAccount !== null && senderAccount.balance > amount && amount > 0) {
       senderAccount.balance =
         parseFloat(senderAccount.balance) - parseFloat(amount);
       receiverAccount.balance =
@@ -52,16 +61,22 @@ const Transfer = () => {
         receiverAccountNumber,
         JSON.stringify(receiverAccount)
       );
-
+      setSeverity('success')
+      setReceiverAccountNumber('')
+      setSenderAccountNumber('')
+      setAmount('')
       saveToTransactionHistory();
       window.location.reload();
     } else {
-      setAlert(true);
-      setAnimationDelay(true);
+      setSeverity("error")
     }
+    setAlert(true);
+    setAnimationDelay(true);
   };
 
   return (
+    <>
+    {alert ? alertHandler() :  <></>}
     <div
       className="modal fade"
       id="transferModal"
@@ -84,34 +99,8 @@ const Transfer = () => {
           </div>
           <div className="modal-body">
             <div className="col-xl p-2">
-              {alert ? (
-                <Fade in={animationDelay === true}>
-                  <Alert
-                    onClose={() => {
-                      setAnimationDelay(false);
-                      setTimeout(function () {
-                        setAlert(false);
-                      }, 500);
-                    }}
-                    variant="filled"
-                    severity="error"
-                    className="position-fixed bottom-0 start-50 translate-middle z-top mt-5"
-                  >
-                    Insufficient funds to transfer
-                  </Alert>
-                </Fade>
-              ) : (
-                <></>
-              )}
+              
               <h3 className="m-0 pl-2">Sender</h3>
-              <div className="mb-3">
-                <label className="form-label">Account Name</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  placeholder=" Enter Name Here"
-                />
-              </div>
               <div className="mb-3">
                 <label className="form-label">Account Number</label>
                 <input
@@ -124,14 +113,6 @@ const Transfer = () => {
                 />
               </div>
               <h3 className="m-0 pl-2">Receiver</h3>
-              <div className="mb-3">
-                <label className="form-label">Account Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder=" Enter Name Here"
-                />
-              </div>
               <div className="mb-3">
                 <label className="form-label">Account Number</label>
                 <input
@@ -168,6 +149,7 @@ const Transfer = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

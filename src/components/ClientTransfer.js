@@ -54,8 +54,8 @@ const ClientTransfer = (props) => {
     let receiverAccount = JSON.parse(localStorage.getItem(receipientAccountNumber));
     let d = new Date()
     let date = d.getDate()
-    let month = d.getMonth()
-    let dateToBeSaved = `${date}/${month}`
+    let month = d.getMonth()+1;
+    let dateToBeSaved = `${month}/${date}`
     let transactions = senderAccount.transactions
     transactions.push({
       'title': 'Transfer',
