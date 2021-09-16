@@ -1,6 +1,7 @@
 import LoginPage from "./components/LoginPage.js";
 import Admin from "./components/Admin.js";
 import HomePage from "./components/HomePage";
+import NotFound from "./components/NotFound";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
@@ -44,6 +45,7 @@ function App() {
           <Route exact path="/" component={LoginPage} />
           <Route exact path="/home" component={HomePage} />
           <Route exact path="/admin" component={Admin} />
+          <Route component={NotFound}/>
         </Switch>
       </div>
     </Router>
