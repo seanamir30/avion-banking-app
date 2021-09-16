@@ -77,7 +77,7 @@ const Withdraw = ({updateTable}) => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="withdrawModalLabel">
-                WITHDRAW
+                Withdraw
               </h5>
               <button
                 type="button"
@@ -124,7 +124,7 @@ const Withdraw = ({updateTable}) => {
                 data-bs-dismiss="modal"
                 onClick={handleDisplayName}
               >
-                WITHDRAW
+                Withdraw
               </button>
             </div>
           </div>

@@ -32,7 +32,7 @@ const AddAccountModal = ({updateTable}) => {
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">ADD ACCOUNT</h5>
+            <h5 className="modal-title display-2">Add Account</h5>
             <button
               type="button"
               className="btn-close"
@@ -103,7 +103,7 @@ const AddAccountModal = ({updateTable}) => {
               <button type="button" onClick={addAccount} className="btn btn-danger"
                 data-bs-dismiss="modal"
                 aria-label="Close">
-                ADD
+                Add
               </button>
             </div>
           </form>

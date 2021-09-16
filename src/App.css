@@ -9,7 +9,7 @@ body {
 }
 
 .btn {
-    width: 100px;
+    width: 90px;
 }
 
 .confirmationModal {
@@ -262,7 +262,6 @@ input[type="checkbox"] {
 
 .modal {
     background-color: #38393a;
-    font-family: "Montserrat", sans-serif;
     /* font-weight: 600; */
 }
 

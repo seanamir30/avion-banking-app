@@ -102,7 +102,7 @@ const Transfer = ({ updateTable }) => {
           <div className="modal-content ">
             <div className="modal-header">
               <h5 className="modal-title" id="transferModalLabel">
-                TRANSFER
+                Transfer
               </h5>
               <button
                 type="button"
@@ -156,7 +156,7 @@ const Transfer = ({ updateTable }) => {
                   data-bs-dismiss="modal"
                   onClick={handleDisplayName}
                 >
-                  TRANSFER
+                  Transfer
                 </button>
               </div>
             </div>

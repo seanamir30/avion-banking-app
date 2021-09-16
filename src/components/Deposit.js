@@ -79,7 +79,7 @@ const Deposit = ({ updateTable }) => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="depositModalLabel">
-                DEPOSIT
+                Deposit
               </h5>
               <button
                 type="button"
@@ -119,7 +119,7 @@ const Deposit = ({ updateTable }) => {
                   data-bs-dismiss="modal"
                   onClick={handleDisplayName}
                 >
-                  DEPOSIT
+                  Deposit
                 </button>
               </div>
             </div>
