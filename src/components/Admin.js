@@ -32,13 +32,13 @@ const Accounts = () => {
     <div className="container mt-3">
       <AddAccountModal updateTable={updateTable}/>
       <h2 className="text-center display-5">All Accounts</h2>
-      <table className="table">
+      <table  className="table text-center">
         <thead>
           <tr>
             <th>Name</th>
             <th>Account Number</th>
             <th>Balance</th>
-            <th></th>
+            <th className="deleteCol"></th>
           </tr>
         </thead>
         <AccountsTable allAccounts={allAccounts} updateTable={updateTable}/>

@@ -1,5 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap');
 
+/* scroll */
+/* width */
+::-webkit-scrollbar {
+    width: 1px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
 body {
     font-family: "Roboto", sans-serif;
 }
@@ -12,6 +33,9 @@ body {
     width: 90px;
 }
 
+tr {
+    height: 10px;
+}
 .confirmationModal {
     width: 100%;
     position: absolute;
@@ -67,7 +91,21 @@ body {
     box-shadow: none;
 }
 
+.accountsTable{
+    display: block;
+    height: 70vh;
+    overflow: auto;
+}
 
+thead,tbody tr{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.deleteCol{
+    width: 40px;
+}
 /* Menu */
 
 .wrapper {
