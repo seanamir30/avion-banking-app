@@ -1,14 +1,19 @@
 import React from "react";
 import { useState } from "react";
+import TransactionAlert from "./TransactionAlert";
 import Alert from "@material-ui/lab/Alert";
 import { Fade } from "@material-ui/core";
 
 const Transfer = () => {
   const [alert, setAlert] = useState("");
   const [animationDelay, setAnimationDelay] = useState("");
-
+  const [severity, setSeverity] = useState("");
   const [senderAccountNumber, setSenderAccountNumber] = useState("");
   const [receiverAccountNumber, setReceiverAccountNumber] = useState("");
+  let senderAccount = JSON.parse(localStorage.getItem(senderAccountNumber));
+    let receiverAccount = JSON.parse(
+      localStorage.getItem(receiverAccountNumber)
+    );
 
   const [senderName, setSenderName] = useState("");
   const [receiverName, setReceiverName] = useState("");
@@ -16,14 +21,11 @@ const Transfer = () => {
   const [amount, setAmount] = useState(0);
 
   const saveToTransactionHistory = () => {
-    let senderAccount = JSON.parse(localStorage.getItem(senderAccountNumber));
-    let receiverAccount = JSON.parse(
-      localStorage.getItem(receiverAccountNumber)
-    );
+    
     let d = new Date();
     let date = d.getDate();
-    let month = d.getMonth();
-    let dateToBeSaved = `${date}/${month}`;
+    let month = d.getMonth()+1;
+    let dateToBeSaved = `${month}/${date}`;
     let transactions = senderAccount.transactions;
     transactions.push({
       title: "Transfer",
@@ -40,12 +42,18 @@ const Transfer = () => {
     localStorage.setItem(receiverAccount.id, JSON.stringify(receiverAccount));
   };
 
+  const alertHandler = () => {
+    let message = ''
+    if(severity === 'error'){
+      !senderAccount || !receiverAccount ? message = "The account number you have entered is invalid" : senderAccount.balance > amount || receiverAccount.balance > amount || amount === 0 ?  message = "Please enter a valid amount"  : message = "Sorry, you got insufficient funds for your request"
+    }
+    else{message="You have withdrawn successfully!"}
+    setTimeout(()=>{setAnimationDelay(false); setTimeout(()=>{setAlert(false)},500)},5000)
+    return <TransactionAlert aDelay={animationDelay} sAnimationDelay={setAnimationDelay} sAlert={setAlert} message={message} severity={severity}/>
+  }
+
   const handleTransfer = () => {
-    let senderAccount = JSON.parse(localStorage.getItem(senderAccountNumber));
-    let receiverAccount = JSON.parse(
-      localStorage.getItem(receiverAccountNumber)
-    );
-    if (senderAccount.balance > amount) {
+    if (senderAccount !== null && senderAccount.balance > amount && amount > 0) {
       senderAccount.balance =
         parseFloat(senderAccount.balance) - parseFloat(amount);
       receiverAccount.balance =
@@ -56,118 +64,83 @@ const Transfer = () => {
         receiverAccountNumber,
         JSON.stringify(receiverAccount)
       );
-
+      setSeverity('success')
+      setReceiverAccountNumber('')
+      setSenderAccountNumber('')
+      setAmount('')
       saveToTransactionHistory();
       window.location.reload();
     } else {
-      setAlert(true);
-      setAnimationDelay(true);
+      setSeverity("error")
     }
+    setAlert(true);
+    setAnimationDelay(true);
   };
 
   const handleDisplayName = () => {
-    let senderAccount = JSON.parse(localStorage.getItem(senderAccountNumber));
-    let receiverAccount = JSON.parse(
-      localStorage.getItem(receiverAccountNumber)
-    );
-
     setReceiverName(receiverAccount.name);
     setSenderName(senderAccount.name);
   };
   return (
-    <div>
-      <div
-        className="modal fade"
-        id="transferModal"
-        tabindex="-1"
-        aria-labelledby="transferModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered ">
-          <div className="modal-content ">
-            <div className="modal-header">
-              <h5 className="modal-title" id="transferModalLabel">
-                TRANSFER
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <div className="col-xl p-2">
-                {alert ? (
-                  <Fade in={animationDelay === true}>
-                    <Alert
-                      onClose={() => {
-                        setAnimationDelay(false);
-                        setTimeout(function () {
-                          setAlert(false);
-                        }, 500);
-                      }}
-                      variant="filled"
-                      severity="error"
-                      className="position-fixed bottom-0 start-50 translate-middle z-top mt-5"
-                    >
-                      Insufficient funds to transfer
-                    </Alert>
-                  </Fade>
-                ) : (
-                  <></>
-                )}
-                <h3 className="m-0 pl-2">Sender</h3>
-                <div className="mb-3">
-                  <label className="form-label">Account Name</label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder=" Enter Name Here"
-                  />
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Account Number</label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    onWheel={(e) => e.target.blur()}
-                    placeholder=" Enter Account Number Here"
-                    value={senderAccountNumber}
-                    onChange={(e) => setSenderAccountNumber(e.target.value)}
-                  />
-                </div>
-                <h3 className="mt-4 mb-0 pt-2 pl-2 border-top">Receipient</h3>
-                <div className="mb-3">
-                  <label className="form-label">Account Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder=" Enter Name Here"
-                  />
-                </div>
-                <div className="mb-3">
-                  <label className="form-label">Account Number</label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    onWheel={(e) => e.target.blur()}
-                    placeholder=" Enter Account Number Here"
-                    value={receiverAccountNumber}
-                    onChange={(e) => setReceiverAccountNumber(e.target.value)}
-                  />
-                </div>
-                <div className="mb-3 pt-2 mt-4 border-top">
-                  <h3>Amount</h3>
-                  <input
-                    className="form-control"
-                    type="number"
-                    onWheel={(e) => e.target.blur()}
-                    placeholder=" Enter Amount Here"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                  />
-                </div>
+    <>
+    {alert ? alertHandler() :  <></>}
+    <div
+      className="modal fade"
+      id="transferModal"
+      tabindex="-1"
+      aria-labelledby="transferModalLabel"
+      aria-hidden="true"
+    >
+      <div className="modal-dialog modal-dialog-centered ">
+        <div className="modal-content ">
+          <div className="modal-header">
+            <h5 className="modal-title" id="transferModalLabel">
+              TRANSFER
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div className="modal-body">
+            <div className="col-xl p-2">
+              
+              <h3 className="m-0 pl-2">Sender</h3>
+              <div className="mb-3">
+                <label className="form-label">Account Number</label>
+                <input
+                  className="form-control"
+                  type="text"
+                  onWheel={(e) => e.target.blur()}
+                  placeholder=" Enter Account Number Here"
+                  value={senderAccountNumber}
+                  onChange={(e) => setSenderAccountNumber(e.target.value)}
+                />
+              </div>
+              <h3 className="m-0 pl-2">Receiver</h3>
+              <div className="mb-3">
+                <label className="form-label">Account Number</label>
+                <input
+                  className="form-control"
+                  type="text"
+                  onWheel={(e) => e.target.blur()}
+                  placeholder=" Enter Account Number Here"
+                  value={receiverAccountNumber}
+                  onChange={(e) => setReceiverAccountNumber(e.target.value)}
+                />
+              </div>
+              <div className="mb-3">
+                <h3>Amount</h3>
+                <input
+                  className="form-control"
+                  type="number"
+                  onWheel={(e) => e.target.blur()}
+                  placeholder=" Enter Amount Here"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                />
               </div>
             </div>
             <div className="modal-footer">
@@ -241,6 +214,7 @@ const Transfer = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -16,8 +16,8 @@ const ClientWithdraw = (props) => {
   const saveToTransactionHistory = () => {
     let d = new Date()
     let date = d.getDate()
-    let month = d.getMonth()
-    let dateToBeSaved = `${date}/${month}`
+    let month = d.getMonth()+1;
+    let dateToBeSaved = `${month}/${date}`
     let transactions = account.transactions
     transactions.push({
       'title': 'Withdraw',
@@ -42,7 +42,6 @@ const ClientWithdraw = (props) => {
       account.balance = parseFloat(account.balance) - parseFloat(amount)
       localStorage.setItem(props.accountNumber, JSON.stringify(account));
       !props.refreshCheck ? props.refresher(true) : props.refresher(false);
-      console.log(props.refreshCheck)
       setSeverity('success')
       saveToTransactionHistory();
     }

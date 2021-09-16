@@ -7,6 +7,7 @@ import ClientWithdraw from "./ClientWithdraw";
 import ClientTransfer from "./ClientTransfer";
 import TransactionHistory from "./TransactionHistory";
 import Menu from "./Menu";
+import Graph from "./Graph";
 import { LocalAtm, Sync, AccountBalance } from '@material-ui/icons'
 
 function HomePage() {
@@ -50,7 +51,8 @@ function HomePage() {
       <div className="d-flex flex-column align-items-center">
         <Menu />
         <Card id={user.id} />
-        <i className="fas fa-chart-line align-self-end m-2"></i>
+        <Graph id={user.id}/>
+        
         <div className="btn-group" role="group" aria-label="Nav">
           <button
             type="button"

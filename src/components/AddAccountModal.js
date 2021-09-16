@@ -51,6 +51,7 @@ const AddAccountModal = () => {
                   type="text"
                   placeholder="Name"
                   id="name"
+                  required
                 />
               </div>
               <div className="mb-3">
@@ -64,6 +65,7 @@ const AddAccountModal = () => {
                   type="email"
                   placeholder="Email"
                   id="email"
+                  required
                 />
               </div>
               <div className="mb-3">
@@ -77,6 +79,7 @@ const AddAccountModal = () => {
                   type="password"
                   placeholder="Password"
                   id="password"
+                  required
                 />
               </div>
               <div className="mb-3">
@@ -90,6 +93,7 @@ const AddAccountModal = () => {
                   type="number"
                   placeholder="Initial Balance"
                   id="initialBalance"
+                  required
                 />
               </div>
             </div>
