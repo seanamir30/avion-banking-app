@@ -8,6 +8,23 @@ body {
   outline:none;
 }
 
+.btn{
+  width: 100px;
+}
+
+.confirmationModal{
+  width: 100%;
+  position:absolute;
+  top:50vh;
+  left:50vw;
+  transform: translate(-50%, -50%);
+}
+
+.graphModal{
+  background: #fff;
+  border-radius:20px;
+}
+
 .close-modal {
   top: 0;
   right: 0;
