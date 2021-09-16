@@ -2,11 +2,11 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { useState } from "react";
-import { LineChart, Line, Tooltip, Legend, XAxis } from "recharts";
+import { LineChart, Line, Tooltip, Legend, XAxis,YAxis, CartesianGrid } from "recharts";
 import { makeStyles } from '@material-ui/core/styles';
+import {Box} from '@material-ui/core';
 
-const Graph = ({id}) => {
-    const [open, setOpen] = useState(false);
+const Graph = ({id, open, setOpen}) => {
 
     const useStyles = makeStyles(() => ({
         modal: {
@@ -15,10 +15,6 @@ const Graph = ({id}) => {
             justifyContent: 'center',
           }
     }));
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
 
     const handleClose = () => {
         setOpen(false);
@@ -43,7 +39,6 @@ const Graph = ({id}) => {
 
     return (
         <>
-            <i className="fas fa-chart-line align-self-end m-2" onClick={handleOpen}></i>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -55,6 +50,7 @@ const Graph = ({id}) => {
                 }}
             >
                 <Fade in={open}>
+                    <Box className="graphModal p-4">
                     <LineChart
                         width={300}
                         height={300}
@@ -67,8 +63,9 @@ const Graph = ({id}) => {
                         }}
                     >
                         <XAxis dataKey="name" />
+                        <YAxis/>
                         <Tooltip />
-                        <Legend />
+                        <CartesianGrid strokeDasharray="3 3" />
                         <Line
                             dot={{ stroke: '#ff4d2e' }}
                             strokeWidth={6}
@@ -77,7 +74,9 @@ const Graph = ({id}) => {
                             stroke="tomato"
                             activeDot={{ r: 8 }}
                         />
+                        <Legend />
                     </LineChart>
+                    </Box>
                 </Fade>
             </Modal>
         </>
