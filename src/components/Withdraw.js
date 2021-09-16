@@ -6,6 +6,7 @@ import TransactionAlert from "./TransactionAlert";
 const Withdraw = () => {
   const [alert, setAlert] = useState("");
   const [animationDelay, setAnimationDelay] = useState("");
+  const [accountName, setAccountName] = useState("");
   const [severity,setSeverity] = useState('')
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState(0);
@@ -36,6 +37,9 @@ const Withdraw = () => {
   }
 
   const handleWithdraw = () => {
+    let account = JSON.parse(localStorage.getItem(accountNumber));
+    if (account.balance > amount) {
+      account.balance = parseFloat(account.balance) - parseFloat(amount);
     if (account !== null && account.balance > amount && amount !== 0) {
       account.balance -= amount;
       localStorage.setItem(accountNumber, JSON.stringify(account));
@@ -49,6 +53,11 @@ const Withdraw = () => {
     }
     setAlert(true);
     setAnimationDelay(true);
+  };
+
+  const handleDisplayName = () => {
+    let account = JSON.parse(localStorage.getItem(accountNumber));
+    setAccountName(account.name);
   };
 
   return (
@@ -76,6 +85,25 @@ const Withdraw = () => {
             </div>
             <div className="modal-body">
               <div className="col-xl p-2">
+                {alert ? (
+                  <Fade in={animationDelay === true}>
+                    <Alert
+                      onClose={() => {
+                        setAnimationDelay(false);
+                        setTimeout(function () {
+                          setAlert(false);
+                        }, 500);
+                      }}
+                      variant="filled"
+                      severity="error"
+                      className="position-fixed bottom-0 start-50 translate-middle z-top mt-5"
+                    >
+                      Insufficient funds to withdraw
+                    </Alert>
+                  </Fade>
+                ) : (
+                  <></>
+                )}
                 <div className="mb-3">
                   <label htmlFor="accountNumber" className="form-label">
                     Account Number
@@ -83,7 +111,7 @@ const Withdraw = () => {
                   <input
                     className="form-control"
                     id="accountNumber"
-                    type="text"
+                    type="number"
                     onWheel={(e) => e.target.blur()}
                     placeholder=" Enter Account Number Here"
                     value={accountNumber}
@@ -108,11 +136,57 @@ const Withdraw = () => {
             </div>
             <div className="modal-footer">
               <button
+                className="btn btn-danger"
+                data-bs-target="#confirmWithdrawModal"
+                data-bs-toggle="modal"
+                data-bs-dismiss="modal"
+                onClick={handleDisplayName}
+              >
+                WITHDRAW
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="modal fade"
+        id="confirmWithdrawModal"
+        tabindex="-1"
+        aria-labelledby="confirmWithdrawModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="confirmWithdrawModalLabel">
+                Transaction Details
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <p className="lbl-1">
+                Account Name: <span className="lbl-2">{accountName}</span>
+              </p>
+              <p className="lbl-1">
+                Account Number: <span className="lbl-2">{accountNumber}</span>
+              </p>
+              <p className="lbl-1">
+                Withdraw Amount: <span className="lbl-2">&#x20B1;{amount}</span>
+              </p>
+            </div>
+            <div className="modal-footer">
+              <button
                 type="button"
                 className="btn btn-danger"
                 onClick={handleWithdraw}
               >
-                WITHDRAW
+                CONFIRM
               </button>
             </div>
           </div>

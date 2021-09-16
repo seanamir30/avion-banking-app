@@ -11,7 +11,7 @@ const Accounts = () => {
   return (
     <div className="container mt-3">
       <AddAccountModal />
-      <h2 className="text-center">All Accounts</h2>
+      <h2 className="text-center display-5">All Accounts</h2>
       <table className="table">
         <thead>
           <tr>
@@ -25,7 +25,6 @@ const Accounts = () => {
       </table>
       <Withdraw />
       <Transfer />
-      <Deposit />
 
       <div className="d-flex flex-column align-items-center">
         <div className="btn-group" role="group" aria-label="Nav">
@@ -71,6 +70,7 @@ const Accounts = () => {
           </button>
         </div>
       </div>
+      <Deposit />
     </div>
   );
 };
