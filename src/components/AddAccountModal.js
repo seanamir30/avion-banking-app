@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const AddAccountModal = () => {
+const AddAccountModal = ({updateTable}) => {
   // Saves a new user to local storage
 
   function addAccount() {
@@ -17,6 +17,7 @@ const AddAccountModal = () => {
         transactions: [],
       })
     );
+    updateTable()
   }
   //
 
@@ -26,11 +27,12 @@ const AddAccountModal = () => {
   const [name, setName] = useState("");
 
   return (
+    <>
     <div className="modal fade" tabIndex="-1" id="AddAccountModal">
-      <div className="modal-dialog">
+      <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">ADD ACCOUNT</h5>
+            <h5 className="modal-title display-2">Add Account</h5>
             <button
               type="button"
               className="btn-close"
@@ -98,14 +100,17 @@ const AddAccountModal = () => {
               </div>
             </div>
             <div className="modal-footer">
-              <button type="submit" className="btn btn-danger">
-                ADD
+              <button type="button" onClick={addAccount} className="btn btn-danger"
+                data-bs-dismiss="modal"
+                aria-label="Close">
+                Add
               </button>
             </div>
           </form>
         </div>
       </div>
     </div>
+    </>
   );
 };
 

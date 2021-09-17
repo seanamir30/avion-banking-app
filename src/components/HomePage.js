@@ -5,13 +5,13 @@ import ClientDeposit from "./ClientDeposit";
 import ClientWithdraw from "./ClientWithdraw";
 import ClientTransfer from "./ClientTransfer";
 import TransactionHistory from "./TransactionHistory";
-import Menu from "./Menu";
 import Graph from "./Graph";
-import { LocalAtm, Sync, AccountBalance } from "@material-ui/icons";
 import GambleModal from "./GambleModal";
+import { LocalAtm, Sync, AccountBalance, Timeline, Casino } from '@material-ui/icons'
 
 function HomePage() {
   const passedState = useLocation();
+  const [graphModal,setGraphModal] = useState('')
   const { state } = passedState;
   const user = state.verify;
   console.log(user);
@@ -48,9 +48,8 @@ function HomePage() {
       <GambleModal />
 
       <div className="d-flex flex-column align-items-center">
-        <Menu />
         <Card id={user.id} />
-        <Graph id={user.id} />
+        <Graph open={graphModal} setOpen={setGraphModal} id={user.id} />
 
         <div className="btn-group" role="group" aria-label="Nav">
           <button
@@ -85,19 +84,9 @@ function HomePage() {
             Withdraw
           </button>
         </div>
-
-        <div className="btn-group mt-4" role="group" aria-label="Nav">
-          <button
-            type="button"
-            className="btn btn-outline-danger"
-            data-bs-toggle="modal"
-            data-bs-target="#gamble"
-            style={{ lineHeight: "15px" }}
-          >
-            <span style={{ fontSize: "2.5rem" }}>&#x2660;</span>
-            <br />
-            Gamble
-          </button>
+        <div class="btn-group mt-2" role="group">
+          <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#gamble">&#x2660;<br/>Gamble</button>
+          <button type="button" class="btn btn-outline-danger" onClick={()=>setGraphModal(true)}><Timeline/><br/>Graph</button>
         </div>
         <TransactionHistory id={user.id} />
       </div>

@@ -4,7 +4,7 @@ const Card = ({ id }) => {
   const user = JSON.parse(localStorage.getItem(id));
   console.log(id);
   return (
-    <div class="card_ m-3 mt-5">
+    <div class="card_ m-3 mt-4">
       <div class="card__front card__part">
         <p class="card__info">
           <span style={{ fontSize: "1.5rem" }}>&#x2660;</span>INSTACASH
@@ -19,7 +19,7 @@ const Card = ({ id }) => {
         </div>
         <div class="card__space-25">
           <span class="card__label">Balance</span>
-          <p class="card__info">P{user.balance}</p>
+          <p class="card__info">₱{user.balance}</p>
         </div>
       </div>
     </div>

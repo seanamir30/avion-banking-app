@@ -2,14 +2,15 @@ import React from "react";
 import { useState } from "react";
 import TransactionAlert from "./TransactionAlert";
 import Alert from "@material-ui/lab/Alert";
-import { Fade } from "@material-ui/core";
+import { Fade, Modal, Backdrop, Box } from "@material-ui/core";
 
-const Transfer = () => {
+const Transfer = ({ updateTable }) => {
   const [alert, setAlert] = useState("");
   const [animationDelay, setAnimationDelay] = useState("");
   const [severity, setSeverity] = useState("");
   const [senderAccountNumber, setSenderAccountNumber] = useState("");
   const [receiverAccountNumber, setReceiverAccountNumber] = useState("");
+  const [confirmationModal, setConfirmationModal] = useState('');
   let senderAccount = JSON.parse(localStorage.getItem(senderAccountNumber));
   let receiverAccount = JSON.parse(localStorage.getItem(receiverAccountNumber));
 
@@ -19,6 +20,7 @@ const Transfer = () => {
   const [amount, setAmount] = useState(0);
 
   const saveToTransactionHistory = () => {
+    
     let d = new Date();
     let date = d.getDate();
     let month = d.getMonth() + 1;
@@ -40,67 +42,49 @@ const Transfer = () => {
   };
 
   const alertHandler = () => {
-    let message = "";
-    if (severity === "error") {
-      !senderAccount || !receiverAccount
-        ? (message = "The account number you have entered is invalid")
-        : senderAccount.balance > amount ||
-          receiverAccount.balance > amount ||
-          amount === 0
-        ? (message = "Please enter a valid amount")
-        : (message = "Sorry, you got insufficient funds for your request");
-    } else {
-      message = "You have withdrawn successfully!";
+    let message = ''
+    if (severity === 'error') {
+      !senderAccount || !receiverAccount ? message = "The account number you have entered is invalid" : senderAccount.balance > amount || receiverAccount.balance > amount || amount === 0 ? message = "Please enter a valid amount" : message = "Sorry, you got insufficient funds for your request"
     }
-    setTimeout(() => {
-      setAnimationDelay(false);
-      setTimeout(() => {
-        setAlert(false);
-      }, 500);
-    }, 5000);
-    return (
-      <TransactionAlert
-        aDelay={animationDelay}
-        sAnimationDelay={setAnimationDelay}
-        sAlert={setAlert}
-        message={message}
-        severity={severity}
-      />
-    );
-  };
+    else { message = "You have transferred successfully!" }
+    setTimeout(() => { setAnimationDelay(false); setTimeout(() => { setAlert(false) }, 500) }, 5000)
+    return <TransactionAlert aDelay={animationDelay} sAnimationDelay={setAnimationDelay} sAlert={setAlert} message={message} severity={severity} />
+  }
 
   const handleTransfer = () => {
-    if (
-      senderAccount !== null &&
-      senderAccount.balance > amount &&
-      amount > 0
-    ) {
-      senderAccount.balance =
-        parseFloat(senderAccount.balance) - parseFloat(amount);
-      receiverAccount.balance =
-        parseFloat(receiverAccount.balance) + parseFloat(amount);
+    senderAccount.balance =
+      parseFloat(senderAccount.balance) - parseFloat(amount);
+    receiverAccount.balance =
+      parseFloat(receiverAccount.balance) + parseFloat(amount);
 
-      localStorage.setItem(senderAccountNumber, JSON.stringify(senderAccount));
-      localStorage.setItem(
-        receiverAccountNumber,
-        JSON.stringify(receiverAccount)
-      );
-      setSeverity("success");
-      setReceiverAccountNumber("");
-      setSenderAccountNumber("");
-      setAmount("");
-      saveToTransactionHistory();
-      window.location.reload();
-    } else {
-      setSeverity("error");
-    }
+    localStorage.setItem(senderAccountNumber, JSON.stringify(senderAccount));
+    localStorage.setItem(
+      receiverAccountNumber,
+      JSON.stringify(receiverAccount)
+    );
+    setReceiverAccountNumber('')
+    setSenderAccountNumber('')
+    setAmount('')
+    saveToTransactionHistory();
+    updateTable()
+    setConfirmationModal(false)
+    setSeverity("success")
     setAlert(true);
     setAnimationDelay(true);
   };
 
   const handleDisplayName = () => {
-    setReceiverName(receiverAccount.name);
-    setSenderName(senderAccount.name);
+    if (senderAccount !== null && senderAccount.balance > amount && amount > 0) {
+      setReceiverName(receiverAccount.name);
+      setSenderName(senderAccount.name);
+      setConfirmationModal(true)
+    }
+    else {
+      setSeverity("error")
+      setAlert(true);
+      setAnimationDelay(true);
+    }
+
   };
   return (
     <>
@@ -116,7 +100,7 @@ const Transfer = () => {
           <div className="modal-content ">
             <div className="modal-header">
               <h5 className="modal-title" id="transferModalLabel">
-                TRANSFER
+                Transfer
               </h5>
               <button
                 type="button"
@@ -171,7 +155,7 @@ const Transfer = () => {
                   data-bs-dismiss="modal"
                   onClick={handleDisplayName}
                 >
-                  TRANSFER
+                  Transfer
                 </button>
               </div>
             </div>
@@ -229,12 +213,74 @@ const Transfer = () => {
                   data-bs-dismiss="modal"
                   onClick={handleTransfer}
                 >
-                  CONFIRM
+                  Confirm
                 </button>
               </div>
             </div>
           </div>
         </div>
+
+        <Modal
+          open={confirmationModal}
+          onClose={() => { setConfirmationModal(false) }}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={confirmationModal}>
+            <Box className="confirmationModal">
+              <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="confirmTransferModalLabel">
+                      Transaction Details
+                    </h5>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      onClick={() => { setConfirmationModal(false) }}
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <h3 className="m-0 pl-2">Sender</h3>
+                    <p className="lbl-1 mb-0">
+                      Account Name: <span className="lbl-2"> {senderName}</span>
+                    </p>
+                    <p className="lbl-1">
+                      Account Number:
+                      <span className="lbl-2"> {senderAccountNumber}</span>
+                    </p>
+
+                    <h3 className="m-0 pl-2 pt-2 border-top">Receipient</h3>
+                    <p className="lbl-1 mb-0">
+                      Account Name: <span className="lbl-2">{receiverName}</span>
+                    </p>
+                    <p className="lbl-1">
+                      Account Number:
+                      <span className="lbl-2"> {receiverAccountNumber}</span>
+                    </p>
+
+                    <p className="lbl-1 border-top pt-3 mb-0">
+                      Transfer Amount: <span className="lbl-2">&#x20B1;{amount}</span>
+                    </p>
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={handleTransfer}
+                    >
+                      CONFIRM
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Box>
+          </Fade>
+        </Modal>
+
       </div>
     </>
   );

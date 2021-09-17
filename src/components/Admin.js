@@ -1,5 +1,5 @@
 import AddAccountModal from "./AddAccountModal";
-import AdminTransaction from "./AdminTransaction";
+import { useState } from "react";
 import AccountsTable from "./AccountsTable";
 import Withdraw from "./Withdraw";
 import Transfer from "./Transfer";
@@ -8,23 +8,43 @@ import { LocalAtm, Sync, AccountBalance } from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 
 const Accounts = () => {
+
+  let accounts = [];
+
+  const [allAccountsChecked, setAllAccountsChecked] = useState(false);
+  const [allAccounts, setAllAccounts] = useState(accounts);
+
+  if (!allAccountsChecked) {
+    for (let i = 0; i < localStorage.length; i++) {
+      let account = JSON.parse(localStorage.getItem(localStorage.key(i)));
+      if (!account.isAdmin) accounts.push(account);
+    }
+    setAllAccountsChecked(true);
+    setAllAccounts([...accounts]);
+  }
+
+  const updateTable = () => {
+    setAllAccounts([...accounts]);
+    setAllAccountsChecked(false);
+    console.log("update");
+  };
   return (
     <div className="container mt-3">
-      <AddAccountModal />
+      <AddAccountModal updateTable={updateTable}/>
       <h2 className="text-center display-5">All Accounts</h2>
-      <table className="table">
+      <table  className="table text-center">
         <thead>
           <tr>
             <th>Name</th>
             <th>Account Number</th>
             <th>Balance</th>
-            <th></th>
+            <th className="deleteCol"></th>
           </tr>
         </thead>
-        <AccountsTable />
+        <AccountsTable allAccounts={allAccounts} updateTable={updateTable}/>
       </table>
-      <Withdraw />
-      <Transfer />
+      <Withdraw updateTable={updateTable}/>
+      <Transfer updateTable={updateTable} />
 
       <div className="d-flex flex-column align-items-center">
         <div className="btn-group" role="group" aria-label="Nav">
@@ -70,7 +90,7 @@ const Accounts = () => {
           </button>
         </div>
       </div>
-      <Deposit />
+      <Deposit updateTable={updateTable}/>
     </div>
   );
 };
