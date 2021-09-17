@@ -1,4 +1,3 @@
-
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import Card from "./Card";
@@ -7,6 +6,7 @@ import ClientWithdraw from "./ClientWithdraw";
 import ClientTransfer from "./ClientTransfer";
 import TransactionHistory from "./TransactionHistory";
 import Graph from "./Graph";
+import GambleModal from "./GambleModal";
 import { LocalAtm, Sync, AccountBalance, Timeline, Casino } from '@material-ui/icons'
 
 function HomePage() {
@@ -16,7 +16,7 @@ function HomePage() {
   const user = state.verify;
   console.log(user);
 
-  const [refresh, setRefresh] = useState(false)
+  const [refresh, setRefresh] = useState(false);
 
   return (
     <div className="container vh-100">
@@ -45,8 +45,7 @@ function HomePage() {
         accountNumber={user.id}
       />
 
-
-
+      <GambleModal />
 
       <div className="d-flex flex-column align-items-center">
         <Card id={user.id} />
@@ -59,7 +58,8 @@ function HomePage() {
             data-bs-toggle="modal"
             data-bs-target="#clientDepositModal"
           >
-            <AccountBalance /><br />
+            <AccountBalance />
+            <br />
             Deposit
           </button>
           <button
@@ -68,7 +68,8 @@ function HomePage() {
             data-bs-toggle="modal"
             data-bs-target="#clientTransferModal"
           >
-            <Sync /><br />
+            <Sync />
+            <br />
             Transfer
           </button>
           <button
@@ -76,13 +77,15 @@ function HomePage() {
             className="btn btn-outline-danger"
             data-bs-toggle="modal"
             data-bs-target="#clientWithdrawModal"
+            data-bs-dismiss="modal"
           >
-            <LocalAtm /><br />
+            <LocalAtm />
+            <br />
             Withdraw
           </button>
         </div>
         <div class="btn-group mt-2" role="group">
-          <button type="button" class="btn btn-outline-danger"><Casino/><br/>Gamble</button>
+          <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#gamble">&#x2660;<br/>Gamble</button>
           <button type="button" class="btn btn-outline-danger" onClick={()=>setGraphModal(true)}><Timeline/><br/>Graph</button>
         </div>
         <TransactionHistory id={user.id} />

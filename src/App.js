@@ -24,11 +24,11 @@ window.localStorage.setItem(
       { title: "Withdraw", date: "10/8", amount: "-500" },
       { title: "Withdraw", date: "10/8", amount: "-2350" },
     ],
-    balanceHistory:[
-      {name:"9/11", balance: "3000"},
-      {name:"9/12", balance: "3500"},
-      {name:"9/13", balance: "3200"},
-      {name:"9/14", balance: "4500"},
+    balanceHistory: [
+      { name: "9/11", balance: "3000" },
+      { name: "9/12", balance: "3500" },
+      { name: "9/13", balance: "3200" },
+      { name: "9/14", balance: "4500" },
     ],
   })
 );

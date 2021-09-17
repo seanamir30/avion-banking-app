@@ -7,7 +7,7 @@ const Withdraw = ({updateTable}) => {
   const [alert, setAlert] = useState("");
   const [animationDelay, setAnimationDelay] = useState("");
   const [accountName, setAccountName] = useState("");
-  const [severity, setSeverity] = useState('')
+  const [severity, setSeverity] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState(0);
   const [confirmationModal, setConfirmationModal] = useState('');
@@ -49,7 +49,6 @@ const Withdraw = ({updateTable}) => {
     setAlert(true);
     setAnimationDelay(true);
   };
-
   const handleDisplayName = () => {
     if (account !== null && account.balance > amount && amount !== 0) {
       setAccountName(account.name);

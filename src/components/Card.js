@@ -6,7 +6,9 @@ const Card = ({ id }) => {
   return (
     <div class="card_ m-3 mt-4">
       <div class="card__front card__part">
-        <p class="card__info">*Bank Name*</p>
+        <p class="card__info">
+          <span style={{ fontSize: "1.5rem" }}>&#x2660;</span>INSTACASH
+        </p>
         <p class="card_number">
           <div class="card__label">Account Number</div>
           {user.id}

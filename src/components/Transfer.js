@@ -12,9 +12,7 @@ const Transfer = ({ updateTable }) => {
   const [receiverAccountNumber, setReceiverAccountNumber] = useState("");
   const [confirmationModal, setConfirmationModal] = useState('');
   let senderAccount = JSON.parse(localStorage.getItem(senderAccountNumber));
-  let receiverAccount = JSON.parse(
-    localStorage.getItem(receiverAccountNumber)
-  );
+  let receiverAccount = JSON.parse(localStorage.getItem(receiverAccountNumber));
 
   const [senderName, setSenderName] = useState("");
   const [receiverName, setReceiverName] = useState("");
@@ -22,7 +20,7 @@ const Transfer = ({ updateTable }) => {
   const [amount, setAmount] = useState(0);
 
   const saveToTransactionHistory = () => {
-
+    
     let d = new Date();
     let date = d.getDate();
     let month = d.getMonth() + 1;
@@ -113,7 +111,6 @@ const Transfer = ({ updateTable }) => {
             </div>
             <div className="modal-body">
               <div className="col-xl p-2">
-
                 <h3 className="m-0 pl-2">Sender</h3>
                 <div className="mb-3">
                   <label className="form-label">Account Number</label>
@@ -153,10 +150,70 @@ const Transfer = ({ updateTable }) => {
               <div className="modal-footer">
                 <button
                   className="btn btn-danger"
+                  data-bs-target="#confirmTransferModal"
+                  data-bs-toggle="modal"
                   data-bs-dismiss="modal"
                   onClick={handleDisplayName}
                 >
                   Transfer
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="modal fade"
+          id="confirmTransferModal"
+          tabindex="-1"
+          aria-labelledby="confirmTransferModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="confirmTransferModalLabel">
+                  Transaction Details
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <h3 className="m-0 pl-2">Sender</h3>
+                <p className="lbl-1 mb-0">
+                  Account Name: <span className="lbl-2"> {senderName}</span>
+                </p>
+                <p className="lbl-1">
+                  Account Number:
+                  <span className="lbl-2"> {senderAccountNumber}</span>
+                </p>
+
+                <h3 className="m-0 pl-2 pt-2 border-top">Receipient</h3>
+                <p className="lbl-1 mb-0">
+                  Account Name: <span className="lbl-2">{receiverName}</span>
+                </p>
+                <p className="lbl-1">
+                  Account Number:
+                  <span className="lbl-2"> {receiverAccountNumber}</span>
+                </p>
+
+                <p className="lbl-1 border-top pt-3 mb-0">
+                  Transfer Amount:{" "}
+                  <span className="lbl-2">&#x20B1;{amount}</span>
+                </p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  data-bs-dismiss="modal"
+                  onClick={handleTransfer}
+                >
+                  Confirm
                 </button>
               </div>
             </div>

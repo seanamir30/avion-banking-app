@@ -1,3 +1,5 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Laila&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap');
 
 /* scroll */
@@ -347,6 +349,20 @@ input[type="checkbox"] {
     text-align: center
 }
 
+
+.bank-name {
+  font-size: 4rem;
+  font-family: "Laila", sans-serif;
+}
+
+.spade-logo {
+  font-size: 5rem;
+}
+
+#gambleLabel {
+  font-family: "Laila", sans-serif;
+}
+
 .notfound .notfound-404 {
     position: relative;
     height: 240px
@@ -417,3 +433,4 @@ input[type="checkbox"] {
         font-size: 16px
     }
 }
+
