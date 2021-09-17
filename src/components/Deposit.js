@@ -165,7 +165,7 @@ const Deposit = ({ updateTable }) => {
                       className="btn btn-danger"
                       onClick={handleDeposit}
                     >
-                      CONFIRM
+                      Confirm
                     </button>
                   </div>
                 </div>

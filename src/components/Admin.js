@@ -6,13 +6,19 @@ import Transfer from "./Transfer";
 import Deposit from "./Deposit";
 import { LocalAtm, Sync, AccountBalance } from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
+import {useLocation,useHistory} from 'react-router-dom'
 
 const Accounts = () => {
 
-  let accounts = [];
-
+  const adminAccess = JSON.parse(localStorage.getItem('00'))
   const [allAccountsChecked, setAllAccountsChecked] = useState(false);
+  let accounts = [];
   const [allAccounts, setAllAccounts] = useState(accounts);
+  const history = useHistory()
+  if(adminAccess.isLoggedIn){
+  
+
+ 
 
   if (!allAccountsChecked) {
     for (let i = 0; i < localStorage.length; i++) {
@@ -28,6 +34,7 @@ const Accounts = () => {
     setAllAccountsChecked(false);
     console.log("update");
   };
+
   return (
     <div className="container mt-3">
       <AddAccountModal updateTable={updateTable}/>
@@ -93,6 +100,11 @@ const Accounts = () => {
       <Deposit updateTable={updateTable}/>
     </div>
   );
+  }
+  else{
+    history.push({pathname:"/unauthorized"})
+    return null
+  }
 };
 
 export default Accounts;

@@ -1,8 +1,9 @@
-import { useHistory } from "react-router"
+import Logo from "./Logo";
 
 const NotFound = () => {
     return (
         <div id="notfound">
+            <Logo/>
             <div class="notfound">
                 <div class="notfound-404">
                     <h3>Oops! Page not found</h3>

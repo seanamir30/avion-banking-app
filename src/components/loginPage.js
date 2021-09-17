@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import loginImage from "../loginImage.svg"
+import Logo from "./Logo";
 
 const LoginPage = () => {
   let history = useHistory();
@@ -12,6 +14,8 @@ const LoginPage = () => {
         if (verify.email === email) {
           if (verify.password === password) {
             if (verify.isAdmin) {
+              verify.isLoggedIn = true;
+              localStorage.setItem(key,JSON.stringify(verify))
               history.push({ pathname: "/admin", state: { verify } });
               console.log("An admin logged in!");
               break;
@@ -37,12 +41,15 @@ const LoginPage = () => {
 
   return (
     <div className="vh-100">
+      <Logo/>
       <div className="container py-5 h-100">
         <div className="row d-flex align-items-center justify-content-center h-100">
-          <div className="col-md-8 col-log-7 col-xl-7 text-center bank-name">
-            <span className="spade-logo">&#x2660;</span>INSTACASH
+          <div className="col-md-8 col-log-7 col-xl-7 text-center">
+            <img src={loginImage} alt="login" className="loginImage"/>
           </div>
           <div className="col-md-7 col-lg-5 col-xl-5">
+            <div className="card shadow">
+            <div className="card-body">
             <form onSubmit={handleLogin}>
               <div className="form-floating mb-4">
                 <input
@@ -70,10 +77,12 @@ const LoginPage = () => {
                   Password
                 </label>
               </div>
-              <button type="submit" className="btn btn-danger">
+              <button type="submit" className="btn login btn-danger">
                 LOG IN
               </button>
             </form>
+            </div>
+            </div>
           </div>
         </div>
       </div>

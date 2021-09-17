@@ -74,7 +74,7 @@ const Transfer = ({ updateTable }) => {
   };
 
   const handleDisplayName = () => {
-    if (senderAccount !== null && senderAccount.balance > amount && amount > 0) {
+    if (senderAccount !== null && senderAccount.balance > amount && amount > 0 && senderAccount !== receiverAccount) {
       setReceiverName(receiverAccount.name);
       setSenderName(senderAccount.name);
       setConfirmationModal(true)
