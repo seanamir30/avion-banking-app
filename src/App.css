@@ -32,12 +32,13 @@ body {
 }
 
 .btn {
-    width: 90px;
+    width: 100px;
 }
 
 tr {
     height: 10px;
 }
+
 .confirmationModal {
     width: 100%;
     position: absolute;
@@ -75,17 +76,85 @@ tr {
     border-radius: 25px;
 }
 
+.fa-sign-out-alt{
+    cursor: pointer;
+    color:white;
+}
 .transactions {
-    height: 50vh;
+    height: 45vh;
+}
+
+.btn-danger{
+    border: 0;
+    background: #EF3100;
+}
+
+.btn-danger:hover{
+    background: tomato;
+}
+
+.loginImage{
+    height: 60vh;
+    width: 40vw;
+}
+
+@media (max-width:1200px) {
+    .loginImage{
+        height: 40vh;
+        width: 85%;
+    }
+}
+
+
+#logo{
+    position:absolute;
+    font-size: 2rem;
+    margin:10px;
+    top:0;
+    left:0;
+    font-family: Montserrat,sans-serif;
+}
+
+.insta{
+    color:tomato
+}
+
+.cash{
+    color:#EF3100
+}
+
+.transaction:hover{
+    background: #f0f0f0;
+}
+
+
+.graph{
+    margin-top:1rem;
+}
+
+@media (min-width:1200px) {
+    .transactions{
+        height: 90vh;
+    }
+
+    .subButtons{
+        display:none;
+    }
+
+    
+}
+
+@media (max-width:1200px) {
+    .graph{
+        display:none;
+    }
+    .gambleButton{
+        display:none;
+    }
 }
 
 .z-top {
     z-index: 9999;
-}
-
-.fas {
-    font-size: 1.5rem;
-    color: tomato;
 }
 
 .btn:focus {
@@ -274,12 +343,12 @@ input[type="checkbox"] {
 }
 
 .card__space-75 {
-    width: 75%;
+    width: 65%;
     float: left;
 }
 
 .card__space-25 {
-    width: 25%;
+    width: 35%;
     float: left;
 }
 
