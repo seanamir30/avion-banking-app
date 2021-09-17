@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import loginImage from "../loginImage.svg"
+import TransactionAlert from "./TransactionAlert";
 import Logo from "./Logo";
 
 const LoginPage = () => {
+  const [alert, setAlert] = useState("");
+  const [animationDelay, setAnimationDelay] = useState("");
   let history = useHistory();
   // Handles Login
   const handleLogin = () => {
@@ -28,7 +31,8 @@ const LoginPage = () => {
         }
       }
     } catch {
-      alert("try again :(");
+      setAlert(true);
+      setAnimationDelay(true);
     }
   };
 
@@ -41,6 +45,13 @@ const LoginPage = () => {
 
   return (
     <div className="vh-100">
+      {alert? <TransactionAlert
+        aDelay={animationDelay}
+        sAnimationDelay={setAnimationDelay}
+        sAlert={setAlert}
+        message="Incorrect email or password"
+        severity="error"
+      /> :<></>}
       <Logo/>
       <div className="container py-5 h-100">
         <div className="row d-flex align-items-center justify-content-center h-100">

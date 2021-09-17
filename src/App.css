@@ -78,7 +78,6 @@ tr {
 
 .fa-sign-out-alt{
     cursor: pointer;
-    color:white;
 }
 .transactions {
     height: 45vh;
@@ -292,6 +291,7 @@ input[type="checkbox"] {
 /* Card */
 
 .card_ {
+    color:white;
     width: 320px;
     height: 190px;
     -webkit-perspective: 600px;
