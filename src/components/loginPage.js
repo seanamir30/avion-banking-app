@@ -5,28 +5,27 @@ const LoginPage = () => {
   let history = useHistory();
   // Handles Login
   const handleLogin = () => {
-      try{
-        for (let key in localStorage) {
-        let verify = JSON.parse(localStorage.getItem(key))
-        console.log(verify.email===email) 
-        if(verify.email===email){
-          if(verify.password===password){
+    try {
+      for (let key in localStorage) {
+        let verify = JSON.parse(localStorage.getItem(key));
+        console.log(verify.email === email);
+        if (verify.email === email) {
+          if (verify.password === password) {
             if (verify.isAdmin) {
               history.push({ pathname: "/admin", state: { verify } });
               console.log("An admin logged in!");
-              break
+              break;
             } else {
               history.push({ pathname: "/home", state: { verify } });
               console.log("Logged in!");
-              break
-              }
+              break;
             }
           }
         }
       }
-      catch{
-        alert("try again :(");
-      }
+    } catch {
+      alert("try again :(");
+    }
   };
 
   //
@@ -40,8 +39,8 @@ const LoginPage = () => {
     <div className="vh-100">
       <div className="container py-5 h-100">
         <div className="row d-flex align-items-center justify-content-center h-100">
-          <div className="col-md-8 col-log-7 col-xl-7 text-center">
-            *Insert something*
+          <div className="col-md-8 col-log-7 col-xl-7 text-center bank-name">
+            <span className="spade-logo">&#x2660;</span>INSTACASH
           </div>
           <div className="col-md-7 col-lg-5 col-xl-5">
             <form onSubmit={handleLogin}>

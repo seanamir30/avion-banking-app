@@ -7,7 +7,7 @@ const Withdraw = () => {
   const [alert, setAlert] = useState("");
   const [animationDelay, setAnimationDelay] = useState("");
   const [accountName, setAccountName] = useState("");
-  const [severity,setSeverity] = useState('')
+  const [severity, setSeverity] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
   const [amount, setAmount] = useState(0);
   let account = JSON.parse(localStorage.getItem(accountNumber));
@@ -15,7 +15,7 @@ const Withdraw = () => {
   const saveToTransactionHistory = () => {
     let d = new Date();
     let date = d.getDate();
-    let month = d.getMonth()+1;
+    let month = d.getMonth() + 1;
     let dateToBeSaved = `${month}/${date}`;
     let transactions = account.transactions;
     transactions.push({
@@ -27,34 +27,52 @@ const Withdraw = () => {
   };
 
   const alertHandler = () => {
-    let message = ''
-    if(severity === 'error'){
-      !account ? message = "The account number you have entered is invalid" : account.balance > amount || amount === 0 ?  message = "Please enter a valid amount"  : message = "Sorry, you got insufficient funds for your request"
+    let message = "";
+    if (severity === "error") {
+      !account
+        ? (message = "The account number you have entered is invalid")
+        : account.balance > amount || amount === 0
+        ? (message = "Please enter a valid amount")
+        : (message = "Sorry, you got insufficient funds for your request");
+    } else {
+      message = "You have withdrawn successfully!";
     }
-    else{message="You have withdrawn successfully!"}
-    setTimeout(()=>{setAnimationDelay(false); setTimeout(()=>{setAlert(false)},500)},5000)
-    return <TransactionAlert aDelay={animationDelay} sAnimationDelay={setAnimationDelay} sAlert={setAlert} message={message} severity={severity}/>
-  }
+    setTimeout(() => {
+      setAnimationDelay(false);
+      setTimeout(() => {
+        setAlert(false);
+      }, 500);
+    }, 5000);
+    return (
+      <TransactionAlert
+        aDelay={animationDelay}
+        sAnimationDelay={setAnimationDelay}
+        sAlert={setAlert}
+        message={message}
+        severity={severity}
+      />
+    );
+  };
 
   const handleWithdraw = () => {
     let account = JSON.parse(localStorage.getItem(accountNumber));
     if (account.balance > amount) {
       account.balance = parseFloat(account.balance) - parseFloat(amount);
-    if (account !== null && account.balance > amount && amount !== 0) {
-      account.balance -= amount;
-      localStorage.setItem(accountNumber, JSON.stringify(account));
-      setSeverity('success')
-      saveToTransactionHistory();
-      setAccountNumber('')
-      setAmount('')
-      window.location.reload();
-    } else {
-      setSeverity("error")
+      if (account !== null && account.balance > amount && amount !== 0) {
+        account.balance -= amount;
+        localStorage.setItem(accountNumber, JSON.stringify(account));
+        setSeverity("success");
+        saveToTransactionHistory();
+        setAccountNumber("");
+        setAmount("");
+        window.location.reload();
+      } else {
+        setSeverity("error");
+      }
+      setAlert(true);
+      setAnimationDelay(true);
     }
-    setAlert(true);
-    setAnimationDelay(true);
   };
-
   const handleDisplayName = () => {
     let account = JSON.parse(localStorage.getItem(accountNumber));
     setAccountName(account.name);

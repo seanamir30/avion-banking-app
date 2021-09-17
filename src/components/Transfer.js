@@ -11,9 +11,7 @@ const Transfer = () => {
   const [senderAccountNumber, setSenderAccountNumber] = useState("");
   const [receiverAccountNumber, setReceiverAccountNumber] = useState("");
   let senderAccount = JSON.parse(localStorage.getItem(senderAccountNumber));
-    let receiverAccount = JSON.parse(
-      localStorage.getItem(receiverAccountNumber)
-    );
+  let receiverAccount = JSON.parse(localStorage.getItem(receiverAccountNumber));
 
   const [senderName, setSenderName] = useState("");
   const [receiverName, setReceiverName] = useState("");
@@ -21,10 +19,9 @@ const Transfer = () => {
   const [amount, setAmount] = useState(0);
 
   const saveToTransactionHistory = () => {
-    
     let d = new Date();
     let date = d.getDate();
-    let month = d.getMonth()+1;
+    let month = d.getMonth() + 1;
     let dateToBeSaved = `${month}/${date}`;
     let transactions = senderAccount.transactions;
     transactions.push({
@@ -43,17 +40,41 @@ const Transfer = () => {
   };
 
   const alertHandler = () => {
-    let message = ''
-    if(severity === 'error'){
-      !senderAccount || !receiverAccount ? message = "The account number you have entered is invalid" : senderAccount.balance > amount || receiverAccount.balance > amount || amount === 0 ?  message = "Please enter a valid amount"  : message = "Sorry, you got insufficient funds for your request"
+    let message = "";
+    if (severity === "error") {
+      !senderAccount || !receiverAccount
+        ? (message = "The account number you have entered is invalid")
+        : senderAccount.balance > amount ||
+          receiverAccount.balance > amount ||
+          amount === 0
+        ? (message = "Please enter a valid amount")
+        : (message = "Sorry, you got insufficient funds for your request");
+    } else {
+      message = "You have withdrawn successfully!";
     }
-    else{message="You have withdrawn successfully!"}
-    setTimeout(()=>{setAnimationDelay(false); setTimeout(()=>{setAlert(false)},500)},5000)
-    return <TransactionAlert aDelay={animationDelay} sAnimationDelay={setAnimationDelay} sAlert={setAlert} message={message} severity={severity}/>
-  }
+    setTimeout(() => {
+      setAnimationDelay(false);
+      setTimeout(() => {
+        setAlert(false);
+      }, 500);
+    }, 5000);
+    return (
+      <TransactionAlert
+        aDelay={animationDelay}
+        sAnimationDelay={setAnimationDelay}
+        sAlert={setAlert}
+        message={message}
+        severity={severity}
+      />
+    );
+  };
 
   const handleTransfer = () => {
-    if (senderAccount !== null && senderAccount.balance > amount && amount > 0) {
+    if (
+      senderAccount !== null &&
+      senderAccount.balance > amount &&
+      amount > 0
+    ) {
       senderAccount.balance =
         parseFloat(senderAccount.balance) - parseFloat(amount);
       receiverAccount.balance =
@@ -64,14 +85,14 @@ const Transfer = () => {
         receiverAccountNumber,
         JSON.stringify(receiverAccount)
       );
-      setSeverity('success')
-      setReceiverAccountNumber('')
-      setSenderAccountNumber('')
-      setAmount('')
+      setSeverity("success");
+      setReceiverAccountNumber("");
+      setSenderAccountNumber("");
+      setAmount("");
       saveToTransactionHistory();
       window.location.reload();
     } else {
-      setSeverity("error")
+      setSeverity("error");
     }
     setAlert(true);
     setAnimationDelay(true);
@@ -83,137 +104,138 @@ const Transfer = () => {
   };
   return (
     <>
-    {alert ? alertHandler() :  <></>}
-    <div
-      className="modal fade"
-      id="transferModal"
-      tabindex="-1"
-      aria-labelledby="transferModalLabel"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog modal-dialog-centered ">
-        <div className="modal-content ">
-          <div className="modal-header">
-            <h5 className="modal-title" id="transferModalLabel">
-              TRANSFER
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="modal-body">
-            <div className="col-xl p-2">
-              
-              <h3 className="m-0 pl-2">Sender</h3>
-              <div className="mb-3">
-                <label className="form-label">Account Number</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  onWheel={(e) => e.target.blur()}
-                  placeholder=" Enter Account Number Here"
-                  value={senderAccountNumber}
-                  onChange={(e) => setSenderAccountNumber(e.target.value)}
-                />
-              </div>
-              <h3 className="m-0 pl-2">Receiver</h3>
-              <div className="mb-3">
-                <label className="form-label">Account Number</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  onWheel={(e) => e.target.blur()}
-                  placeholder=" Enter Account Number Here"
-                  value={receiverAccountNumber}
-                  onChange={(e) => setReceiverAccountNumber(e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <h3>Amount</h3>
-                <input
-                  className="form-control"
-                  type="number"
-                  onWheel={(e) => e.target.blur()}
-                  placeholder=" Enter Amount Here"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                className="btn btn-danger"
-                data-bs-target="#confirmTransferModal"
-                data-bs-toggle="modal"
-                data-bs-dismiss="modal"
-                onClick={handleDisplayName}
-              >
-                TRANSFER
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      {alert ? alertHandler() : <></>}
       <div
         className="modal fade"
-        id="confirmTransferModal"
+        id="transferModal"
         tabindex="-1"
-        aria-labelledby="confirmTransferModalLabel"
+        aria-labelledby="transferModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
+        <div className="modal-dialog modal-dialog-centered ">
+          <div className="modal-content ">
             <div className="modal-header">
-              <h5 className="modal-title" id="confirmTransferModalLabel">
-                Transaction Details
+              <h5 className="modal-title" id="transferModalLabel">
+                TRANSFER
               </h5>
               <button
                 type="button"
-                className="btn-close"
+                class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
             <div className="modal-body">
-              <h3 className="m-0 pl-2">Sender</h3>
-              <p className="lbl-1 mb-0">
-                Account Name: <span className="lbl-2"> {senderName}</span>
-              </p>
-              <p className="lbl-1">
-                Account Number:
-                <span className="lbl-2"> {senderAccountNumber}</span>
-              </p>
-
-              <h3 className="m-0 pl-2 pt-2 border-top">Receipient</h3>
-              <p className="lbl-1 mb-0">
-                Account Name: <span className="lbl-2">{receiverName}</span>
-              </p>
-              <p className="lbl-1">
-                Account Number:
-                <span className="lbl-2"> {receiverAccountNumber}</span>
-              </p>
-
-              <p className="lbl-1 border-top pt-3 mb-0">
-                Transfer Amount: <span className="lbl-2">&#x20B1;{amount}</span>
-              </p>
+              <div className="col-xl p-2">
+                <h3 className="m-0 pl-2">Sender</h3>
+                <div className="mb-3">
+                  <label className="form-label">Account Number</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    onWheel={(e) => e.target.blur()}
+                    placeholder=" Enter Account Number Here"
+                    value={senderAccountNumber}
+                    onChange={(e) => setSenderAccountNumber(e.target.value)}
+                  />
+                </div>
+                <h3 className="m-0 pl-2">Receiver</h3>
+                <div className="mb-3">
+                  <label className="form-label">Account Number</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    onWheel={(e) => e.target.blur()}
+                    placeholder=" Enter Account Number Here"
+                    value={receiverAccountNumber}
+                    onChange={(e) => setReceiverAccountNumber(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <h3>Amount</h3>
+                  <input
+                    className="form-control"
+                    type="number"
+                    onWheel={(e) => e.target.blur()}
+                    placeholder=" Enter Amount Here"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button
+                  className="btn btn-danger"
+                  data-bs-target="#confirmTransferModal"
+                  data-bs-toggle="modal"
+                  data-bs-dismiss="modal"
+                  onClick={handleDisplayName}
+                >
+                  TRANSFER
+                </button>
+              </div>
             </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={handleTransfer}
-              >
-                CONFIRM
-              </button>
+          </div>
+        </div>
+
+        <div
+          className="modal fade"
+          id="confirmTransferModal"
+          tabindex="-1"
+          aria-labelledby="confirmTransferModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="confirmTransferModalLabel">
+                  Transaction Details
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <h3 className="m-0 pl-2">Sender</h3>
+                <p className="lbl-1 mb-0">
+                  Account Name: <span className="lbl-2"> {senderName}</span>
+                </p>
+                <p className="lbl-1">
+                  Account Number:
+                  <span className="lbl-2"> {senderAccountNumber}</span>
+                </p>
+
+                <h3 className="m-0 pl-2 pt-2 border-top">Receipient</h3>
+                <p className="lbl-1 mb-0">
+                  Account Name: <span className="lbl-2">{receiverName}</span>
+                </p>
+                <p className="lbl-1">
+                  Account Number:
+                  <span className="lbl-2"> {receiverAccountNumber}</span>
+                </p>
+
+                <p className="lbl-1 border-top pt-3 mb-0">
+                  Transfer Amount:{" "}
+                  <span className="lbl-2">&#x20B1;{amount}</span>
+                </p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  data-bs-dismiss="modal"
+                  onClick={handleTransfer}
+                >
+                  CONFIRM
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
