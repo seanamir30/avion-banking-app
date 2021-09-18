@@ -12,7 +12,8 @@ const TransactionHistory = ({ id }) => {
 
     return (
         <div className="container transactions overflow-auto mt-3">
-            {transactions.length === 0 ? <div className="d-flex justify-content-center align-items-center h-100">You got no transactions yet!</div> : user.transactions.map((transaction) => (
+            {transactions.length === 0 ? <div className="d-flex justify-content-center align-items-center h-100">You got no transactions yet!</div> : 
+            user.transactions.map((transaction) => (
                 <div className="row transaction border-bottom p-2">
                     <div className="col">
                         <strong>{transaction.title}</strong><br />

@@ -13,6 +13,10 @@ const AddAccountModal = ({ updateTable }) => {
   const [animationDelay, setAnimationDelay] = useState("");
 
   function addAccount() {
+    let d = new Date();
+    let date = d.getDate();
+    let month = d.getMonth()+1;
+    let currentDate = `${month}/${date}`;
     let id = (Math.floor(Math.random() * 9000000000) + 1000000000).toString();
     localStorage.setItem(
       id,
@@ -24,6 +28,7 @@ const AddAccountModal = ({ updateTable }) => {
         balance: balance,
         name: name,
         transactions: [],
+        balanceHistory: [{"name":currentDate, "balance":balance}],
       })
     );
     setEmail('')

@@ -92,10 +92,10 @@ function HomePage() {
                       <br />
                       Withdraw
                     </button>
-                    <button type="button" class="btn btn-outline-danger gambleButton" data-bs-toggle="modal" data-bs-target="#gamble"><i class="fas fa-dice"></i><br />Gamble</button>
+                    <button type="button" class="btn btn-outline-danger gambleButton disabled" data-bs-toggle="modal" data-bs-target="#gamble"><i class="fas fa-dice"></i><br />Gamble</button>
                   </div>
                   <div class="btn-group mt-2 subButtons" role="group">
-                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#gamble"><i class="fas fa-dice"></i><br />Gamble</button>
+                    <button type="button" class="btn btn-outline-danger disabled" data-bs-toggle="modal" data-bs-target="#gamble" ><i class="fas fa-dice"></i><br />Gamble</button>
                     <button type="button" class="btn btn-outline-danger" onClick={() => setGraphModal(true)}><Timeline /><br />Graph</button>
                   </div>
                 </div>

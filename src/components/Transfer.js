@@ -150,8 +150,6 @@ const Transfer = ({ updateTable }) => {
               <div className="modal-footer">
                 <button
                   className="btn btn-danger"
-                  data-bs-target="#confirmTransferModal"
-                  data-bs-toggle="modal"
                   data-bs-dismiss="modal"
                   onClick={handleDisplayName}
                 >
