@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/avion-banking-app/static/css/main.ff392d94.chunk.css",
+    "main.js": "/avion-banking-app/static/js/main.3055c09e.chunk.js",
+    "main.js.map": "/avion-banking-app/static/js/main.3055c09e.chunk.js.map",
+    "runtime-main.js": "/avion-banking-app/static/js/runtime-main.f9ade4ea.js",
+    "runtime-main.js.map": "/avion-banking-app/static/js/runtime-main.f9ade4ea.js.map",
+    "static/js/2.aa608a70.chunk.js": "/avion-banking-app/static/js/2.aa608a70.chunk.js",
+    "static/js/2.aa608a70.chunk.js.map": "/avion-banking-app/static/js/2.aa608a70.chunk.js.map",
+    "static/js/3.7e714c26.chunk.js": "/avion-banking-app/static/js/3.7e714c26.chunk.js",
+    "static/js/3.7e714c26.chunk.js.map": "/avion-banking-app/static/js/3.7e714c26.chunk.js.map",
+    "index.html": "/avion-banking-app/index.html",
+    "static/css/main.ff392d94.chunk.css.map": "/avion-banking-app/static/css/main.ff392d94.chunk.css.map",
+    "static/js/2.aa608a70.chunk.js.LICENSE.txt": "/avion-banking-app/static/js/2.aa608a70.chunk.js.LICENSE.txt",
+    "static/media/loginImage.52c1248c.svg": "/avion-banking-app/static/media/loginImage.52c1248c.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f9ade4ea.js",
+    "static/js/2.aa608a70.chunk.js",
+    "static/css/main.ff392d94.chunk.css",
+    "static/js/main.3055c09e.chunk.js"
+  ]
+}
