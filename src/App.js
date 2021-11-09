@@ -3,7 +3,7 @@ import Admin from "./components/Admin.js";
 import HomePage from "./components/HomePage";
 import NotFound from "./components/NotFound";
 import Unauthorized from "./components/Unauthorized"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 
